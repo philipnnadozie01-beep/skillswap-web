@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Práctica Web</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><rect width=%22100%22 height=%22100%22 rx=%2220%22 fill=%22%233498db%22/><text x=%2250%22 y=%2262%22 font-size=%2240%22 fill=%22white%22 text-anchor=%22middle%22 font-family=%22Arial%22>SS</text></svg>">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>Skillswap</h1>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="explorar.html">Explorar</a>
+      <a href="#">Mi perfil</a>
+    </nav>
+  </header>
+  
+  <div class="hero">
+  <h2>Aprende cualquier habilidad, enseñando la tuya</h2>
+  <p>Conecta con personas que quieren aprender lo que tú sabes, y aprende lo que siempre quisiste de alguien real.</p>
+  <a href="explorar.html" class="hero-button">Explorar habilidades</a>
+</div>
+
+  <main>
+    <section>
+      <p>Aprende habilidades nuevas intercambiando lo que ya sabes con otras personas.</p>
+
+      <div class="cards-container">
+        <div class="card">Guitarra</div>
+        <div class="card">Excel</div>
+        <div class="card">Inglés</div>
+        <div class="card">Cocina</div>
+        <div class="card">Fotografía</div>
+        <div class="card">Piano</div>
+        <div class="card">Programación</div>
+        <div class="card">Yoga</div>
+        <div class="card">Diseño gráfico</div>
+        <div class="card">Francés</div>
+        <div class="card">Lectura activa</div>
+        <div class="card">Colaboración en equipo</div>
+      </div>
+
+      <form>
+        <label for="buscar">Buscar habilidad:</label>
+        <input type="text" id="buscar" placeholder="Ej: Guitarra">
+
+        <label for="categoria">Categoría:</label>
+        <select id="categoria">
+          <option value="musica">Música</option>
+          <option value="tecnologia">Tecnología</option>
+          <option value="idiomas">Idiomas</option>
+        </select>
+
+        <button type="submit">Buscar</button>
+      </form>
+      <p id="error" style="color: red;"></p>
+    </section>
+
+    <section class="how-it-works">
+      <h2>Cómo funciona</h2>
+
+      <div class="steps-container">
+        <div class="step">
+          <div class="step-number">1</div>
+          <h3>Busca</h3>
+          <p>Encuentra a alguien que enseñe la habilidad que quieres aprender.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">2</div>
+          <h3>Contacta</h3>
+          <p>Ponte en contacto y acuerda qué habilidad puedes ofrecer a cambio.</p>
+        </div>
+
+        <div class="step">
+          <div class="step-number">3</div>
+          <h3>Aprende</h3>
+          <p>Intercambia conocimiento y crece junto a otras personas.</p>
+        </div>
+      </div>
+    </section>
+    <section class="testimonials">
+  <h2>Lo que dicen nuestros usuarios</h2>
+
+  <div class="testimonials-container">
+    <div class="testimonial">
+      <p class="testimonial-text">"Aprendí guitarra en 2 meses a cambio de dar clases de inglés. Nunca pensé que fuera tan fácil encontrar a la persona ideal."</p>
+      <p class="testimonial-author">— Azucena M.</p>
+    </div>
+
+    <div class="testimonial">
+      <p class="testimonial-text">"Llevo muchos años queriendo aprender a tocar La guitarra . En Skillswap encontré a alguien a cambio de darle clases de baile."</p>
+      <p class="testimonial-author">— Javier R.</p>
+    </div>
+
+        <div class="testimonial">
+      <p class="testimonial-text">"Llevaba años queriendo aprender yoga. En Skillswap encontré a alguien a cambio de darle clases de cocina."</p>
+      <p class="testimonial-author">— Deborah L.</p>
+    </div>
+
+    <div class="testimonial">
+      <p class="testimonial-text">"Lo que más me gusta es que no hay dinero de por medio, solo intercambio real de conocimiento entre personas."</p>
+      <p class="testimonial-author">— Laura P.</p>
+    </div>
+  </div>
+</section>
+<section class="mentor-cta">
+  <h2>¿Tienes una habilidad que enseñar?</h2>
+  <p>Únete como mentor y empieza a intercambiar lo que sabes por algo que siempre quisiste aprender.</p>
+  <a href="perfil.html" class="mentor-button">Conviértete en mentor</a>
+</section>
+  </main>
+
+<footer>
+  <div class="footer-columns">
+    <div class="footer-col">
+      <h4>Skillswap</h4>
+      <p>Aprende y enseña habilidades intercambiando conocimiento con otras personas.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4>Enlaces</h4>
+      <a href="index.html">Inicio</a>
+      <a href="explorar.html">Explorar</a>
+      <a href="perfil.html">Mi perfil</a>
+    </div>
+
+    <div class="footer-col">
+      <h4>Contacto</h4>
+      <p>contacto@skillswap.com</p>
+      <div class="footer-social">
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+  </div>
+
+  <p class="footer-copyright">&copy; 2026 Skillswap</p>
+</footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
