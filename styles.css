@@ -390,3 +390,22 @@ footer {
   color: #555;
   line-height: 1.6;
 }
+.lang-switcher {
+  display: flex;
+  gap: 8px;
+}
+
+.lang-button {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.lang-button:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}

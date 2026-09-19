@@ -5,11 +5,11 @@
   <title>Práctica Web</title>
   <meta name="description" content="Skillswap: aprende y enseña habilidades intercambiando conocimiento con otras personas.">
 
-<meta property="og:title" content="Skillswap — Aprende enseñando">
-<meta property="og:description" content="Conecta con personas que quieren aprender lo que tú sabes, y aprende lo que siempre quisiste de alguien real.">
-<meta property="og:image" content="https://philipnnadozie01-beep.github.io/skillswap-web/images/guru.jpeg">
-<meta property="og:url" content="https://philipnnadozie01-beep.github.io/skillswap-web/">
-<meta property="og:type" content="website">
+  <meta property="og:title" content="Skillswap — Aprende enseñando">
+  <meta property="og:description" content="Conecta con personas que quieren aprender lo que tú sabes, y aprende lo que siempre quisiste de alguien real.">
+  <meta property="og:image" content="https://philipnnadozie01-beep.github.io/skillswap-web/images/guru.jpeg">
+  <meta property="og:url" content="https://philipnnadozie01-beep.github.io/skillswap-web/">
+  <meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%233498db' d='M7 7h8.5L13 4.5 14.5 3 19 7.5 14.5 12 13 10.5 15.5 8H7a3 3 0 000 6h2v2H7a5 5 0 010-10z'/%3E%3Cpath fill='%233498db' d='M17 17H8.5L11 19.5 9.5 21 5 16.5 9.5 12 11 13.5 8.5 16H17a3 3 0 000-6h-2V8h2a5 5 0 010 10z'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -17,154 +17,157 @@
 
   <header>
     <div class="logo">
-  <svg class="logo-icon" viewBox="0 0 24 24" width="28" height="28">
-    <path fill="currentColor" d="M7 7h8.5L13 4.5 14.5 3 19 7.5 14.5 12 13 10.5 15.5 8H7a3 3 0 000 6h2v2H7a5 5 0 010-10z"/>
-    <path fill="currentColor" d="M17 17H8.5L11 19.5 9.5 21 5 16.5 9.5 12 11 13.5 8.5 16H17a3 3 0 000-6h-2V8h2a5 5 0 010 10z"/>
-  </svg>
-  <span>Skillswap</span>
-</div>
+      <svg class="logo-icon" viewBox="0 0 24 24" width="28" height="28">
+        <path fill="currentColor" d="M7 7h8.5L13 4.5 14.5 3 19 7.5 14.5 12 13 10.5 15.5 8H7a3 3 0 000 6h2v2H7a5 5 0 010-10z"/>
+        <path fill="currentColor" d="M17 17H8.5L11 19.5 9.5 21 5 16.5 9.5 12 11 13.5 8.5 16H17a3 3 0 000-6h-2V8h2a5 5 0 010 10z"/>
+      </svg>
+      <span>Skillswap</span>
+    </div>
     <nav>
-      <a href="index.html">Inicio</a>
-      <a href="explorar.html">Explorar</a>
-      <a href="#">Mi perfil</a>
-      <a href="sobre-nosotros.html">Sobre nosotros</a>
+      <a href="index.html" data-i18n="nav_inicio">Inicio</a>
+      <a href="explorar.html" data-i18n="nav_explorar">Explorar</a>
+      <a href="perfil.html" data-i18n="nav_perfil">Mi perfil</a>
+      <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
     </nav>
+    <div class="lang-switcher">
+      <button class="lang-button" data-lang="es">ES</button>
+      <button class="lang-button" data-lang="en">EN</button>
+    </div>
   </header>
-  
+
   <div class="hero">
-  <h2>Aprende cualquier habilidad, enseñando la tuya</h2>
-  <p>Conecta con personas que quieren aprender lo que tú sabes, y aprende lo que siempre quisiste de alguien real.</p>
-  <a href="explorar.html" class="hero-button">Explorar habilidades</a>
-</div>
+    <h2 data-i18n="hero_title">Aprende cualquier habilidad, enseñando la tuya</h2>
+    <p data-i18n="hero_text">Conecta con personas que quieren aprender lo que tú sabes, y aprende lo que siempre quisiste de alguien real.</p>
+    <a href="explorar.html" class="hero-button" data-i18n="hero_button">Explorar habilidades</a>
+  </div>
 
   <main>
     <section class="reveal">
-       <h2>Nuestras habilidades</h2>
-      <p>Aprende habilidades nuevas intercambiando lo que ya sabes con otras personas.</p>
+      <h2 data-i18n="skills_title">Nuestras habilidades</h2>
+      <p data-i18n="skills_text">Aprende habilidades nuevas intercambiando lo que ya sabes con otras personas.</p>
 
       <div class="cards-container">
-        <div class="card">Guitarra</div>
-        <div class="card">Excel</div>
-        <div class="card">Inglés</div>
-        <div class="card">Cocina</div>
-        <div class="card">Fotografía</div>
-        <div class="card">Piano</div>
-        <div class="card">Programación</div>
-        <div class="card">Yoga</div>
-        <div class="card">Diseño gráfico</div>
-        <div class="card">Francés</div>
-        <div class="card">Lectura activa</div>
-        <div class="card">Colaboración en equipo</div>
+        <div class="card"><span class="card-icon">🎸</span>Guitarra</div>
+        <div class="card"><span class="card-icon">📊</span>Excel</div>
+        <div class="card"><span class="card-icon">🗣️</span>Inglés</div>
+        <div class="card"><span class="card-icon">🍳</span>Cocina</div>
+        <div class="card"><span class="card-icon">📷</span>Fotografía</div>
+        <div class="card"><span class="card-icon">🎹</span>Piano</div>
+        <div class="card"><span class="card-icon">💻</span>Programación</div>
+        <div class="card"><span class="card-icon">🧘</span>Yoga</div>
+        <div class="card"><span class="card-icon">🎨</span>Diseño gráfico</div>
+        <div class="card"><span class="card-icon">🇫🇷</span>Francés</div>
+        <div class="card"><span class="card-icon">📖</span>Lectura activa</div>
+        <div class="card"><span class="card-icon">🤝</span>Colaboración en equipo</div>
       </div>
 
       <form>
-        <label for="buscar">Buscar habilidad:</label>
-        <input type="text" id="buscar" placeholder="Ej: Guitarra">
+        <label for="buscar" data-i18n="search_label">Buscar habilidad:</label>
+        <input type="text" id="buscar" data-i18n="search_placeholder" placeholder="Ej: Guitarra">
 
-        <label for="categoria">Categoría:</label>
+        <label for="categoria" data-i18n="category_label">Categoría:</label>
         <select id="categoria">
-          <option value="musica">Música</option>
-          <option value="tecnologia">Tecnología</option>
-          <option value="idiomas">Idiomas</option>
+          <option value="musica" data-i18n="cat_musica">Música</option>
+          <option value="tecnologia" data-i18n="cat_tecnologia">Tecnología</option>
+          <option value="idiomas" data-i18n="cat_idiomas">Idiomas</option>
         </select>
 
-        <button type="submit">Buscar</button>
+        <button type="submit" data-i18n="search_button">Buscar</button>
       </form>
       <p id="error" style="color: red;"></p>
     </section>
 
     <section class="how-it-works reveal">
-      <h2>Cómo funciona</h2>
+      <h2 data-i18n="how_title">Cómo funciona</h2>
 
       <div class="steps-container">
         <div class="step">
           <div class="step-number">1</div>
-          <h3>Busca</h3>
-          <p>Encuentra a alguien que enseñe la habilidad que quieres aprender.</p>
+          <h3 data-i18n="step1_title">Busca</h3>
+          <p data-i18n="step1_text">Encuentra a alguien que enseñe la habilidad que quieres aprender.</p>
         </div>
 
         <div class="step">
           <div class="step-number">2</div>
-          <h3>Contacta</h3>
-          <p>Ponte en contacto y acuerda qué habilidad puedes ofrecer a cambio.</p>
+          <h3 data-i18n="step2_title">Contacta</h3>
+          <p data-i18n="step2_text">Ponte en contacto y acuerda qué habilidad puedes ofrecer a cambio.</p>
         </div>
 
         <div class="step">
           <div class="step-number">3</div>
-          <h3>Aprende</h3>
-          <p>Intercambia conocimiento y crece junto a otras personas.</p>
+          <h3 data-i18n="step3_title">Aprende</h3>
+          <p data-i18n="step3_text">Intercambia conocimiento y crece junto a otras personas.</p>
         </div>
       </div>
     </section>
+
     <section class="testimonials reveal">
-  <h2>Lo que dicen nuestros usuarios</h2>
+      <h2 data-i18n="testimonials_title">Lo que dicen nuestros usuarios</h2>
 
-  <div class="testimonials-container">
-    <div class="testimonial">
-      <p class="testimonial-text">"Aprendí guitarra en 2 meses a cambio de dar clases de inglés. Nunca pensé que fuera tan fácil encontrar a la persona ideal."</p>
-      <p class="testimonial-author">— Azucena M.</p>
-    </div>
-
-    <div class="testimonial">
-      <p class="testimonial-text">"Llevo muchos años queriendo aprender a tocar La guitarra . En Skillswap encontré a alguien a cambio de darle clases de baile."</p>
-      <p class="testimonial-author">— Javier R.</p>
-    </div>
+      <div class="testimonials-container">
+        <div class="testimonial">
+          <p class="testimonial-text">"Aprendí guitarra en 2 meses a cambio de dar clases de inglés. Nunca pensé que fuera tan fácil encontrar a la persona ideal."</p>
+          <p class="testimonial-author">— María G.</p>
+        </div>
 
         <div class="testimonial">
-      <p class="testimonial-text">"Llevaba años queriendo aprender yoga. En Skillswap encontré a alguien a cambio de darle clases de cocina."</p>
-      <p class="testimonial-author">— Deborah L.</p>
-    </div>
+          <p class="testimonial-text">"Llevaba años queriendo aprender a programar. En Skillswap encontré a alguien a cambio de darle clases de cocina."</p>
+          <p class="testimonial-author">— Javier R.</p>
+        </div>
 
-    <div class="testimonial">
-      <p class="testimonial-text">"Lo que más me gusta es que no hay dinero de por medio, solo intercambio real de conocimiento entre personas."</p>
-      <p class="testimonial-author">— Laura P.</p>
-    </div>
-  </div>
-</section>
-<section class="mentor-cta reveal">
-  <h2>¿Tienes una habilidad que enseñar?</h2>
-  <p>Únete como mentor y empieza a intercambiar lo que sabes por algo que siempre quisiste aprender.</p>
-  <a href="perfil.html" class="mentor-button">Conviértete en mentor</a>
-</section>
-<section class="contact-section reveal">
-  <h2>¿Quieres estar entre los primeros en probar Skillswap?</h2>
-  <p>Déjanos tu email y te avisaremos en cuanto esté disponible.</p>
+        <div class="testimonial">
+          <p class="testimonial-text">"Lo que más me gusta es que no hay dinero de por medio, solo intercambio real de conocimiento entre personas."</p>
+          <p class="testimonial-author">— Laura P.</p>
+        </div>
+      </div>
+    </section>
 
-  <form action="https://formspree.io/f/xnpnneky" method="POST" class="contact-form">
-    <input type="email" name="email" placeholder="tu-email@ejemplo.com" required>
-    <button type="submit">Quiero probarlo</button>
-  </form>
-</section>
+    <section class="mentor-cta reveal">
+      <h2 data-i18n="mentor_title">¿Tienes una habilidad que enseñar?</h2>
+      <p data-i18n="mentor_text">Únete como mentor y empieza a intercambiar lo que sabes por algo que siempre quisiste aprender.</p>
+      <a href="perfil.html" class="mentor-button" data-i18n="mentor_button">Conviértete en mentor</a>
+    </section>
+
+    <section class="contact-section reveal">
+      <h2 data-i18n="contact_title">¿Quieres estar entre los primeros en probar Skillswap?</h2>
+      <p data-i18n="contact_text">Déjanos tu email y te avisaremos en cuanto esté disponible.</p>
+
+      <form action="https://formspree.io/f/xnpnneky" method="POST" class="contact-form">
+        <input type="email" name="email" placeholder="tu-email@ejemplo.com" required>
+        <button type="submit" data-i18n="contact_button">Quiero probarlo</button>
+      </form>
+    </section>
   </main>
 
-<footer>
-  <div class="footer-columns">
-    <div class="footer-col">
-      <h3>Skillswap</h3>
-      <p>Aprende y enseña habilidades intercambiando conocimiento con otras personas.</p>
-    </div>
+  <footer>
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h3>Skillswap</h3>
+        <p data-i18n="footer_desc">Aprende y enseña habilidades intercambiando conocimiento con otras personas.</p>
+      </div>
 
-    <div class="footer-col">
-      <h3>Enlaces</h3>
-      <a href="index.html">Inicio</a>
-      <a href="explorar.html">Explorar</a>
-      <a href="perfil.html">Mi perfil</a>
-       <a href="sobre-nosotros.html">Sobre nosotros</a>
-    </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer_links">Enlaces</h3>
+        <a href="index.html" data-i18n="nav_inicio">Inicio</a>
+        <a href="explorar.html" data-i18n="nav_explorar">Explorar</a>
+        <a href="perfil.html" data-i18n="nav_perfil">Mi perfil</a>
+        <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+      </div>
 
-    <div class="footer-col">
-      <h3>Contacto</h3>
-      <p>contacto@skillswap.com</p>
-      <div class="footer-social">
-        <a href="#">Instagram</a>
-        <a href="#">LinkedIn</a>
+      <div class="footer-col">
+        <h3 data-i18n="footer_contact">Contacto</h3>
+        <p>contacto@skillswap.com</p>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <p class="footer-copyright">&copy; 2026 Skillswap</p>
-</footer>
+    <p class="footer-copyright">&copy; 2026 Skillswap</p>
+  </footer>
 
+  <script src="translations.js"></script>
   <script src="script.js"></script>
 </body>
 </html>

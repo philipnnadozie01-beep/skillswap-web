@@ -3,86 +3,91 @@
 <head>
   <meta charset="UTF-8">
   <title>Mi perfil — Skillswap</title>
-  <meta name="description" content="Skillswap: aprende y enseña habilidades intercambiando conocimiento con otras personas.">
-
-<meta property="og:title" content="Skillswap — Aprende enseñando">
-<meta property="og:description" content="Conecta con personas que quieren aprender lo que tú sabes, y aprende lo que siempre quisiste de alguien real.">
-<meta property="og:image" content="https://philipnnadozie01-beep.github.io/skillswap-web/images/guru.jpeg">
-<meta property="og:url" content="https://philipnnadozie01-beep.github.io/skillswap-web/">
-<meta property="og:type" content="website">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cpath fill='%233498db' d='M7 7h8.5L13 4.5 14.5 3 19 7.5 14.5 12 13 10.5 15.5 8H7a3 3 0 000 6h2v2H7a5 5 0 010-10z'/%3E%3Cpath fill='%233498db' d='M17 17H8.5L11 19.5 9.5 21 5 16.5 9.5 12 11 13.5 8.5 16H17a3 3 0 000-6h-2V8h2a5 5 0 010 10z'/%3E%3C/svg%3E">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
   <header>
-    
+    <div class="logo">
+      <svg class="logo-icon" viewBox="0 0 24 24" width="28" height="28">
+        <path fill="currentColor" d="M7 7h8.5L13 4.5 14.5 3 19 7.5 14.5 12 13 10.5 15.5 8H7a3 3 0 000 6h2v2H7a5 5 0 010-10z"/>
+        <path fill="currentColor" d="M17 17H8.5L11 19.5 9.5 21 5 16.5 9.5 12 11 13.5 8.5 16H17a3 3 0 000-6h-2V8h2a5 5 0 010 10z"/>
+      </svg>
+      <span>Skillswap</span>
+    </div>
     <nav>
-      <a href="index.html">Inicio</a>
-      <a href="explorar.html">Explorar</a>
-      <a href="perfil.html">Mi perfil</a>
-      <a href="sobre-nosotros.html">Sobre nosotros</a>
+      <a href="index.html" data-i18n="nav_inicio">Inicio</a>
+      <a href="explorar.html" data-i18n="nav_explorar">Explorar</a>
+      <a href="perfil.html" data-i18n="nav_perfil">Mi perfil</a>
+      <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
     </nav>
+    <div class="lang-switcher">
+      <button class="lang-button" data-lang="es">ES</button>
+      <button class="lang-button" data-lang="en">EN</button>
+    </div>
   </header>
 
   <main>
     <section class="profile-section">
-<img src="images/guru.jpeg.jpeg" alt="Foto de Guru" class="profile-avatar-img">
+      <img src="images/guru.jpeg.jpeg" alt="Foto de Guru" class="profile-avatar-img">
       <h2>Guru</h2>
       <p class="profile-bio">Filósofo en transición hacia la tecnología, aprendiendo a programar construyendo proyectos reales.</p>
 
-<div class="profile-skills">
-  <div class="profile-column">
-    <h3>Habilidades que ofrezco</h3>
-    <div class="cards-container">
-      <div class="card"><span class="card-icon">🎷</span>Saxofón</div>
-      <div class="card"><span class="card-icon">🎼</span>Arreglo musical</div>
-      <div class="card"><span class="card-icon">🎵</span>Flauta travesera</div>
-      <div class="card"><span class="card-icon">🎤</span>Clases de canto</div>
-      <div class="card"><span class="card-icon">🗣️</span>Clases de inglés</div>
-      <div class="card"><span class="card-icon">🇪🇸</span>Español para extranjeros</div>
-      <div class="card"><span class="card-icon">🧠</span>Filosofía</div>
-    </div>
-  </div>
+      <div class="profile-skills">
+        <div class="profile-column">
+          <h3 data-i18n="profile_offer">Habilidades que ofrezco</h3>
+          <div class="cards-container">
+            <div class="card"><span class="card-icon">🎷</span>Saxofón</div>
+            <div class="card"><span class="card-icon">🎼</span>Arreglo musical</div>
+            <div class="card"><span class="card-icon">🎵</span>Flauta travesera</div>
+            <div class="card"><span class="card-icon">🎤</span>Clases de canto</div>
+            <div class="card"><span class="card-icon">🗣️</span>Clases de inglés</div>
+            <div class="card"><span class="card-icon">🇪🇸</span>Español para extranjeros</div>
+            <div class="card"><span class="card-icon">🧠</span>Filosofía</div>
+          </div>
+        </div>
 
-  <div class="profile-column">
-    <h3>Habilidades que busco aprender</h3>
-    <div class="cards-container">
-      <div class="card"><span class="card-icon">💻</span>Programación web</div>
-      <div class="card"><span class="card-icon">🔒</span>Ciberseguridad</div>
-    </div>
-  </div>
-</div>
+        <div class="profile-column">
+          <h3 data-i18n="profile_seek">Habilidades que busco aprender</h3>
+          <div class="cards-container">
+            <div class="card"><span class="card-icon">💻</span>Programación web</div>
+            <div class="card"><span class="card-icon">🔒</span>Ciberseguridad</div>
+          </div>
+        </div>
+      </div>
     </section>
   </main>
 
-<footer>
-  <div class="footer-columns">
-    <div class="footer-col">
-      <h3>Skillswap</h3>
-      <p>Aprende y enseña habilidades intercambiando conocimiento con otras personas.</p>
-    </div>
+  <footer>
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h3>Skillswap</h3>
+        <p data-i18n="footer_desc">Aprende y enseña habilidades intercambiando conocimiento con otras personas.</p>
+      </div>
 
-    <div class="footer-col">
-      <h3>Enlaces</h3>
-      <a href="index.html">Inicio</a>
-      <a href="explorar.html">Explorar</a>
-      <a href="perfil.html">Mi perfil</a>
-       <a href="sobre-nosotros.html">Sobre nosotros</a>
-    </div>
+      <div class="footer-col">
+        <h3 data-i18n="footer_links">Enlaces</h3>
+        <a href="index.html" data-i18n="nav_inicio">Inicio</a>
+        <a href="explorar.html" data-i18n="nav_explorar">Explorar</a>
+        <a href="perfil.html" data-i18n="nav_perfil">Mi perfil</a>
+        <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+      </div>
 
-    <div class="footer-col">
-      <h3>Contacto</h3>
-      <p>contacto@skillswap.com</p>
-      <div class="footer-social">
-        <a href="#">Instagram</a>
-        <a href="#">LinkedIn</a>
+      <div class="footer-col">
+        <h3 data-i18n="footer_contact">Contacto</h3>
+        <p>contacto@skillswap.com</p>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+        </div>
       </div>
     </div>
-  </div>
 
-  <p class="footer-copyright">&copy; 2026 Skillswap</p>
-</footer>
+    <p class="footer-copyright">&copy; 2026 Skillswap</p>
+  </footer>
 
+  <script src="translations.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
