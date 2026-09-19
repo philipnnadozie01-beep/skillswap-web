@@ -409,3 +409,24 @@ footer {
 .lang-button:hover {
   background-color: rgba(255, 255, 255, 0.15);
 }
+[dir="rtl"] .hero,
+[dir="rtl"] .how-it-works,
+[dir="rtl"] .testimonials,
+[dir="rtl"] .mentor-cta,
+[dir="rtl"] .contact-section,
+[dir="rtl"] .about-section {
+  text-align: center;
+}
+
+[dir="rtl"] .profile-skills,
+[dir="rtl"] .footer-columns {
+  text-align: right;
+}
+
+[dir="rtl"] header {
+  flex-direction: row-reverse;
+}
+
+[dir="rtl"] .lang-switcher {
+  flex-direction: row-reverse;
+}
