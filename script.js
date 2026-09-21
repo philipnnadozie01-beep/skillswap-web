@@ -51,3 +51,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
   elementosReveal.forEach((el) => observer.observe(el));
 });
+const temaGuardado = localStorage.getItem("skillswap-theme") || "light";
+if (temaGuardado === "dark") {
+  document.documentElement.setAttribute("data-theme", "dark");
+}
+
+const botonTema = document.getElementById("theme-toggle");
+if (botonTema) {
+  botonTema.textContent = temaGuardado === "dark" ? "☀️" : "🌙";
+  botonTema.addEventListener("click", () => {
+    const esOscuro = document.documentElement.getAttribute("data-theme") === "dark";
+    if (esOscuro) {
+      document.documentElement.removeAttribute("data-theme");
+      localStorage.setItem("skillswap-theme", "light");
+      botonTema.textContent = "🌙";
+    } else {
+      document.documentElement.setAttribute("data-theme", "dark");
+      localStorage.setItem("skillswap-theme", "dark");
+      botonTema.textContent = "☀️";
+    }
+  });
+}
