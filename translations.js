@@ -316,10 +316,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const idiomaGuardado = localStorage.getItem("skillswap-lang") || "es";
   setLanguage(idiomaGuardado);
 
-  const botonesIdioma = document.querySelectorAll(".lang-button");
-  botonesIdioma.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      setLanguage(btn.getAttribute("data-lang"));
+  const selectorIdioma = document.getElementById("lang-select");
+  if (selectorIdioma) {
+    selectorIdioma.value = idiomaGuardado;
+    selectorIdioma.addEventListener("change", () => {
+      setLanguage(selectorIdioma.value);
     });
-  });
+  }
 });
