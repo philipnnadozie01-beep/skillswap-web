@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://philipnnadozie01-beep.github.io/skillswap-web/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://philipnnadozie01-beep.github.io/skillswap-web/explorar.html</loc>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://philipnnadozie01-beep.github.io/skillswap-web/perfil.html</loc>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://philipnnadozie01-beep.github.io/skillswap-web/sobre-nosotros.html</loc>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://philipnnadozie01-beep.github.io/skillswap-web/politica-privacidad.html</loc>
+    <priority>0.3</priority>
+  </url>
+</urlset>

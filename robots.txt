@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://philipnnadozie01-beep.github.io/skillswap-web/sitemap.xml
