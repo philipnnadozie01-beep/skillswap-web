@@ -585,3 +585,13 @@ footer {
   white-space: nowrap;
   border: 0;
 }
+.card-suggest {
+  background-color: transparent;
+  border: 2px dashed #3498db;
+  color: #3498db;
+  cursor: pointer;
+}
+
+.card-suggest:hover {
+  background-color: rgba(52, 152, 219, 0.1);
+}

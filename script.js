@@ -50,25 +50,36 @@ document.addEventListener("DOMContentLoaded", () => {
   }, { threshold: 0.15 });
 
   elementosReveal.forEach((el) => observer.observe(el));
-});
-const temaGuardado = localStorage.getItem("skillswap-theme") || "light";
-if (temaGuardado === "dark") {
-  document.documentElement.setAttribute("data-theme", "dark");
-}
 
-const botonTema = document.getElementById("theme-toggle");
-if (botonTema) {
-  botonTema.textContent = temaGuardado === "dark" ? "☀️" : "🌙";
-  botonTema.addEventListener("click", () => {
-    const esOscuro = document.documentElement.getAttribute("data-theme") === "dark";
-    if (esOscuro) {
-      document.documentElement.removeAttribute("data-theme");
-      localStorage.setItem("skillswap-theme", "light");
-      botonTema.textContent = "🌙";
-    } else {
-      document.documentElement.setAttribute("data-theme", "dark");
-      localStorage.setItem("skillswap-theme", "dark");
-      botonTema.textContent = "☀️";
-    }
-  });
-}
+  const temaGuardado = localStorage.getItem("skillswap-theme") || "light";
+  if (temaGuardado === "dark") {
+    document.documentElement.setAttribute("data-theme", "dark");
+  }
+
+  const botonTema = document.getElementById("theme-toggle");
+  if (botonTema) {
+    botonTema.textContent = temaGuardado === "dark" ? "☀️" : "🌙";
+    botonTema.addEventListener("click", () => {
+      const esOscuro = document.documentElement.getAttribute("data-theme") === "dark";
+      if (esOscuro) {
+        document.documentElement.removeAttribute("data-theme");
+        localStorage.setItem("skillswap-theme", "light");
+        botonTema.textContent = "🌙";
+      } else {
+        document.documentElement.setAttribute("data-theme", "dark");
+        localStorage.setItem("skillswap-theme", "dark");
+        botonTema.textContent = "☀️";
+      }
+    });
+  }
+
+  const tarjetaSugerir = document.getElementById("suggest-card");
+  if (tarjetaSugerir) {
+    tarjetaSugerir.addEventListener("click", () => {
+      const contacto = document.querySelector(".contact-section");
+      if (contacto) {
+        contacto.scrollIntoView({ behavior: "smooth" });
+      }
+    });
+  }
+});
