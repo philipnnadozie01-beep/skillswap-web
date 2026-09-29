@@ -671,3 +671,61 @@ main {
   font-size: 14px;
   min-height: 18px;
 }
+.auth-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: 15px;
+}
+
+.auth-user {
+  color: white;
+  font-size: 14px;
+}
+
+.auth-logout, .auth-login-link {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.auth-logout:hover, .auth-login-link:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+header {
+  background-color: var(--header-bg);
+  color: white;
+  padding: 15px 30px;
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 20px;
+}
+
+.header-controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.auth-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

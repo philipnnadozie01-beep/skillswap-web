@@ -15,43 +15,45 @@
   <link rel="stylesheet" href="styles.css">
   <script data-goatcounter="https://skillswap-web.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
+<script type="module" src="auth-ui.js"></script>
 <body>
 
   <header>
-    <div class="logo">
-      <svg class="logo-icon" viewBox="0 0 24 24" width="30" height="30">
-        <defs>
-          <linearGradient id="logoGrad" x1="0" y1="0" x2="24" y2="24">
-            <stop offset="0" stop-color="#3498db"/>
-            <stop offset="1" stop-color="#2c3e50"/>
-          </linearGradient>
-        </defs>
-        <circle cx="12" cy="12" r="12" fill="url(#logoGrad)"/>
-        <path fill="white" d="M7 7h7.5L13 5.5 14.2 4.3 17.9 8 14.2 11.7 13 10.5 14.5 9H7a2.2 2.2 0 000 4.4h1.5v1.6H7a3.8 3.8 0 010-7.6z"/>
-        <path fill="white" d="M17 17H9.5L11 18.5 9.8 19.7 6.1 16 9.8 12.3 11 13.5 9.5 15H17a2.2 2.2 0 000-4.4h-1.5V9.4H17a3.8 3.8 0 010 7.6z"/>
-      </svg>
-      <span>Skillswap</span>
-    </div>
-    <nav>
-      <a href="index.html" data-i18n="nav_inicio">Inicio</a>
-      <a href="explorar.html" data-i18n="nav_explorar">Explorar</a>
-      <a href="perfil.html" data-i18n="nav_perfil">Mi perfil</a>
-      <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
-      <a href="politica-privacidad.html">Política de privacidad</a>
-    </nav>
-    <div class="lang-switcher">
-      <select id="lang-select" class="lang-select">
-        <option value="es">🇪🇸 Español</option>
-        <option value="en">🇬🇧 English</option>
-        <option value="fr">🇫🇷 Français</option>
-        <option value="pt">🇵🇹 Português</option>
-        <option value="de">🇩🇪 Deutsch</option>
-        <option value="it">🇮🇹 Italiano</option>
-        <option value="ar">🇸🇦 العربية</option>
-      </select>
-    </div>
+  <div class="logo">
+    <svg class="logo-icon" viewBox="0 0 24 24" width="30" height="30">
+      <defs>
+        <linearGradient id="logoGrad" x1="0" y1="0" x2="24" y2="24">
+          <stop offset="0" stop-color="#3498db"/>
+          <stop offset="1" stop-color="#2c3e50"/>
+        </linearGradient>
+      </defs>
+      <circle cx="12" cy="12" r="12" fill="url(#logoGrad)"/>
+      <path fill="white" d="M7 7h7.5L13 5.5 14.2 4.3 17.9 8 14.2 11.7 13 10.5 14.5 9H7a2.2 2.2 0 000 4.4h1.5v1.6H7a3.8 3.8 0 010-7.6z"/>
+      <path fill="white" d="M17 17H9.5L11 18.5 9.8 19.7 6.1 16 9.8 12.3 11 13.5 9.5 15H17a2.2 2.2 0 000-4.4h-1.5V9.4H17a3.8 3.8 0 010 7.6z"/>
+    </svg>
+    <span>Skillswap</span>
+  </div>
+  <nav>
+    <a href="index.html" data-i18n="nav_inicio">Inicio</a>
+    <a href="explorar.html" data-i18n="nav_explorar">Explorar</a>
+    <a href="perfil.html" data-i18n="nav_perfil">Mi perfil</a>
+    <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+    <a href="politica-privacidad.html">Política de privacidad</a>
+  </nav>
+  <div class="header-controls">
+    <select id="lang-select" class="lang-select">
+      <option value="es">🇪🇸 Español</option>
+      <option value="en">🇬🇧 English</option>
+      <option value="fr">🇫🇷 Français</option>
+      <option value="pt">🇵🇹 Português</option>
+      <option value="de">🇩🇪 Deutsch</option>
+      <option value="it">🇮🇹 Italiano</option>
+      <option value="ar">🇸🇦 العربية</option>
+    </select>
     <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button>
-  </header>
+    <div id="auth-status" class="auth-status"></div>
+  </div>
+</header>
 
   <div class="hero">
     <h2 data-i18n="hero_title">Aprende. Enseña. Intercambia.</h2>
