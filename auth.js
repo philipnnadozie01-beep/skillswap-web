@@ -1,4 +1,4 @@
-import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "./firebase-config.js";
+import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, db, doc, setDoc } from "./firebase-config.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".auth-tab");
@@ -47,7 +47,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((resultado) => {
-        console.log("Usuario creado:", resultado.user.uid, "Nombre:", nombre);
+        const usuario = resultado.user;
+        return setDoc(doc(db, "perfiles", usuario.uid), {
+          nombre: nombre,
+          email: email,
+          bio: "",
+          habilidadesOfrezco: [],
+          habilidadesBusco: [],
+          creado: new Date().toISOString()
+        });
+      })
+      .then(() => {
         window.location.href = "perfil.html";
       })
       .catch((error) => {
