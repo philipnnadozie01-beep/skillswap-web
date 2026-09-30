@@ -11,13 +11,14 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     querySnapshot.forEach((docSnap) => {
       const datos = docSnap.data();
+      const uid = docSnap.id;
       (datos.habilidadesOfrezco || []).forEach((h) => {
         const clave = h.trim().toLowerCase();
         if (!clave) return;
         if (!mapaHabilidades[clave]) {
           mapaHabilidades[clave] = { nombre: h.trim(), personas: [] };
         }
-        mapaHabilidades[clave].personas.push(datos.nombre);
+        mapaHabilidades[clave].personas.push({ nombre: datos.nombre, uid: uid });
       });
     });
 
@@ -32,10 +33,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
     habilidades.forEach((item) => {
+      const nombresPersonas = item.personas.map(p => p.nombre).join(", ");
       const tarjeta = document.createElement("div");
       tarjeta.className = "card";
-      tarjeta.title = "Ofrecido por: " + item.personas.join(", ");
+      tarjeta.title = "Ofrecido por: " + nombresPersonas + " (haz clic para ver)";
       tarjeta.innerHTML = `<span class="card-icon">✨</span>${item.nombre}`;
+      tarjeta.style.cursor = "pointer";
+      tarjeta.addEventListener("click", () => {
+        window.location.href = "perfil-publico.html?uid=" + item.personas[0].uid;
+      });
       contenedor.insertBefore(tarjeta, suggestCard);
     });
   } catch (error) {
