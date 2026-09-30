@@ -1,4 +1,4 @@
-import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, db, doc, setDoc } from "./firebase-config.js";
+import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, db, doc, setDoc, collection, addDoc, serverTimestamp } from "./firebase-config.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll(".auth-tab");
@@ -45,6 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const errorBox = document.getElementById("register-error");
     errorBox.textContent = "";
 
+    const CREDITOS_BIENVENIDA = 10;
+
     createUserWithEmailAndPassword(auth, email, password)
       .then((resultado) => {
         const usuario = resultado.user;
@@ -54,7 +56,16 @@ document.addEventListener("DOMContentLoaded", () => {
           bio: "",
           habilidadesOfrezco: [],
           habilidadesBusco: [],
+          creditos: CREDITOS_BIENVENIDA,
           creado: new Date().toISOString()
+        }).then(() => {
+          return addDoc(collection(db, "transacciones"), {
+            usuarioId: usuario.uid,
+            tipo: "bienvenida",
+            cantidad: CREDITOS_BIENVENIDA,
+            descripcion: "Créditos de bienvenida al registrarte",
+            fecha: serverTimestamp()
+          });
         });
       })
       .then(() => {

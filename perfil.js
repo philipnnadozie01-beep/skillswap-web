@@ -23,6 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const datos = perfilSnap.data();
+    const creditos = typeof datos.creditos === "number" ? datos.creditos : 0;
 
     const ofrezcoHtml = (datos.habilidadesOfrezco || []).map(h => `<div class="card">${h}</div>`).join("") || "<p class='empty-msg'>Aún no has añadido habilidades.</p>";
     const buscoHtml = (datos.habilidadesBusco || []).map(h => `<div class="card">${h}</div>`).join("") || "<p class='empty-msg'>Aún no has añadido habilidades.</p>";
@@ -30,6 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     contenedor.innerHTML = `
       <div class="profile-avatar-placeholder">${datos.nombre.charAt(0).toUpperCase()}</div>
       <h2>${datos.nombre}</h2>
+      <div class="credits-badge">💰 ${creditos} créditos</div>
       <p class="profile-bio">${datos.bio || "Todavía no has escrito una biografía."}</p>
 
       <div class="profile-skills">
