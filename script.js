@@ -76,10 +76,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const tarjetaSugerir = document.getElementById("suggest-card");
   if (tarjetaSugerir) {
     tarjetaSugerir.addEventListener("click", () => {
-      const contacto = document.querySelector(".contact-section");
-      if (contacto) {
-        contacto.scrollIntoView({ behavior: "smooth" });
-      }
+      window.location.href = "sugerir-habilidad.html";
     });
   }
 });
