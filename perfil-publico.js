@@ -1,4 +1,4 @@
-import { auth, onAuthStateChanged, db, doc, getDoc } from "./firebase-config.js";
+import { auth, onAuthStateChanged, db, doc, getDoc, addDoc, collection, serverTimestamp } from "./firebase-config.js";
 
 const params = new URLSearchParams(window.location.search);
 const uidPerfil = params.get("uid");
@@ -31,11 +31,15 @@ document.addEventListener("DOMContentLoaded", () => {
     const ofrezcoHtml = (datos.habilidadesOfrezco || []).map(h => `<div class="card">${h}</div>`).join("") || "<p class='empty-msg'>Sin habilidades añadidas.</p>";
     const buscoHtml = (datos.habilidadesBusco || []).map(h => `<div class="card">${h}</div>`).join("") || "<p class='empty-msg'>Sin habilidades añadidas.</p>";
 
-    let botonContacto = "";
+    let accionesHtml = "";
     if (usuarioActual) {
-      botonContacto = `<button id="contact-btn" class="mentor-button" style="margin-top: 25px;">Enviar mensaje</button>`;
+      accionesHtml = `
+        <button id="contact-btn" class="mentor-button" style="margin-top: 25px;">Enviar mensaje</button>
+        <button id="session-btn" class="hero-button-dark" style="margin-top: 10px;">Registrar sesión con esta persona</button>
+        <div id="session-form" style="display:none; margin-top:20px; text-align:left; max-width:350px; margin-left:auto; margin-right:auto;"></div>
+      `;
     } else {
-      botonContacto = `<p style="margin-top: 20px;">Debes <a href="cuenta.html">iniciar sesión</a> para enviar un mensaje.</p>`;
+      accionesHtml = `<p style="margin-top: 20px;">Debes <a href="cuenta.html">iniciar sesión</a> para contactar o registrar una sesión.</p>`;
     }
 
     contenedor.innerHTML = `
@@ -54,13 +58,59 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
       </div>
 
-      ${botonContacto}
+      ${accionesHtml}
     `;
 
-    const btn = document.getElementById("contact-btn");
-    if (btn) {
-      btn.addEventListener("click", () => {
+    const btnMsg = document.getElementById("contact-btn");
+    if (btnMsg) {
+      btnMsg.addEventListener("click", () => {
         window.location.href = "mensajes.html?con=" + uidPerfil;
+      });
+    }
+
+    const btnSesion = document.getElementById("session-btn");
+    const formSesion = document.getElementById("session-form");
+    if (btnSesion) {
+      btnSesion.addEventListener("click", () => {
+        formSesion.style.display = formSesion.style.display === "none" ? "block" : "none";
+        formSesion.innerHTML = `
+          <label>¿Qué hiciste?</label>
+          <select id="rol-select" style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
+            <option value="ensene">Yo enseñé</option>
+            <option value="aprendi">Yo aprendí</option>
+          </select>
+          <label>¿Cuántas horas?</label>
+          <input type="number" id="horas-input" min="0.5" step="0.5" value="1" style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
+          <button id="submit-session" class="mentor-button" style="width:100%;">Enviar registro</button>
+          <p id="session-msg" class="auth-error"></p>
+        `;
+
+        document.getElementById("submit-session").addEventListener("click", async () => {
+          const rol = document.getElementById("rol-select").value;
+          const horas = parseFloat(document.getElementById("horas-input").value);
+          const msg = document.getElementById("session-msg");
+
+          if (!horas || horas <= 0) {
+            msg.textContent = "Introduce un número de horas válido.";
+            return;
+          }
+
+          try {
+            await addDoc(collection(db, "sesiones"), {
+              creadorId: usuarioActual.uid,
+              otroId: uidPerfil,
+              rolCreador: rol,
+              horas: horas,
+              estado: "pendiente",
+              fecha: serverTimestamp()
+            });
+            msg.style.color = "#27ae60";
+            msg.textContent = "✅ Registro enviado. Quedará pendiente hasta que " + datos.nombre + " lo confirme.";
+          } catch (error) {
+            msg.textContent = "Error al enviar. Inténtalo de nuevo.";
+            console.error(error);
+          }
+        });
       });
     }
   });
