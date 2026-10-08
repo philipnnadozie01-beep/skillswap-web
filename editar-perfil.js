@@ -1,4 +1,5 @@
 import { auth, onAuthStateChanged, db, doc, getDoc, updateDoc } from "./firebase-config.js";
+import { esc } from "./utils.js";
 
 let habilidadesOfrezco = [];
 let habilidadesBusco = [];
@@ -28,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
       <h2>Editar mi perfil</h2>
 
       <label for="bio-input">Biografía</label>
-      <textarea id="bio-input" rows="3" class="edit-textarea">${datos.bio || ""}</textarea>
+      <textarea id="bio-input" rows="3" class="edit-textarea">${esc(datos.bio)}</textarea>
 
       <div class="edit-skills-block">
         <label>Habilidades que ofrezco</label>
@@ -69,11 +70,11 @@ function renderizarListas() {
   const buscoList = document.getElementById("busco-list");
 
   ofrezcoList.innerHTML = habilidadesOfrezco.map((h, i) =>
-    `<span class="skill-tag">${h} <button type="button" data-tipo="ofrezco" data-index="${i}" class="tag-remove">✕</button></span>`
+    `<span class="skill-tag">${esc(h)} <button type="button" data-tipo="ofrezco" data-index="${i}" class="tag-remove">✕</button></span>`
   ).join("");
 
   buscoList.innerHTML = habilidadesBusco.map((h, i) =>
-    `<span class="skill-tag">${h} <button type="button" data-tipo="busco" data-index="${i}" class="tag-remove">✕</button></span>`
+    `<span class="skill-tag">${esc(h)} <button type="button" data-tipo="busco" data-index="${i}" class="tag-remove">✕</button></span>`
   ).join("");
 
   document.querySelectorAll(".tag-remove").forEach((btn) => {

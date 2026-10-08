@@ -1,4 +1,5 @@
 import { auth, onAuthStateChanged, signOut } from "./firebase-config.js";
+import { esc } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const contenedor = document.getElementById("auth-status");
@@ -7,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   onAuthStateChanged(auth, (usuario) => {
     if (usuario) {
       contenedor.innerHTML = `
-        <span class="auth-user">${usuario.email}</span>
+        <span class="auth-user">${esc(usuario.email)}</span>
         <button id="logout-btn" class="auth-logout">Cerrar sesión</button>
       `;
       document.getElementById("logout-btn").addEventListener("click", () => {

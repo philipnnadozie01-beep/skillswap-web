@@ -1,4 +1,5 @@
 import { db, collection, getDocs } from "./firebase-config.js";
+import { esc } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", async () => {
   const contenedor = document.getElementById("cards-container");
@@ -37,7 +38,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const tarjeta = document.createElement("div");
       tarjeta.className = "card";
       tarjeta.title = "Ofrecido por: " + nombresPersonas + " (haz clic para ver)";
-      tarjeta.innerHTML = `<span class="card-icon">✨</span>${item.nombre}`;
+      tarjeta.innerHTML = `<span class="card-icon">✨</span>${esc(item.nombre)}`;
       tarjeta.style.cursor = "pointer";
       tarjeta.addEventListener("click", () => {
         window.location.href = "perfil-publico.html?uid=" + item.personas[0].uid;

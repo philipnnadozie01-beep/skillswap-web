@@ -1,4 +1,5 @@
 import { auth, onAuthStateChanged, db, collection, getDocs, addDoc, serverTimestamp } from "./firebase-config.js";
+import { esc } from "./utils.js";
 
 function normalizar(texto) {
   return texto
@@ -94,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (coincidencia) {
         resultado.innerHTML = `
-          <p>¿Quizás te refieres a <strong>"${coincidencia}"</strong>? Ya existe en Skillswap.</p>
+          <p>¿Quizás te refieres a <strong>"${esc(coincidencia)}"</strong>? Ya existe en Skillswap.</p>
           <a href="editar-perfil.html" class="mentor-button">Añadirla a mi perfil</a>
         `;
       } else {
@@ -104,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
           fecha: serverTimestamp()
         });
         resultado.innerHTML = `
-          <p>✅ No encontramos nada parecido todavía — hemos guardado <strong>"${texto}"</strong> como sugerencia nueva. ¡Gracias por ayudarnos a crecer el catálogo!</p>
+          <p>✅ No encontramos nada parecido todavía — hemos guardado <strong>"${esc(texto)}"</strong> como sugerencia nueva. ¡Gracias por ayudarnos a crecer el catálogo!</p>
         `;
       }
     });

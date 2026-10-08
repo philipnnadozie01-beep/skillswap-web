@@ -1,4 +1,5 @@
 import { auth, onAuthStateChanged, db, doc, getDoc, addDoc, collection, serverTimestamp } from "./firebase-config.js";
+import { esc } from "./utils.js";
 
 const params = new URLSearchParams(window.location.search);
 const uidPerfil = params.get("uid");
@@ -28,8 +29,8 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const ofrezcoHtml = (datos.habilidadesOfrezco || []).map(h => `<div class="card">${h}</div>`).join("") || "<p class='empty-msg'>Sin habilidades añadidas.</p>";
-    const buscoHtml = (datos.habilidadesBusco || []).map(h => `<div class="card">${h}</div>`).join("") || "<p class='empty-msg'>Sin habilidades añadidas.</p>";
+    const ofrezcoHtml = (datos.habilidadesOfrezco || []).map(h => `<div class="card">${esc(h)}</div>`).join("") || "<p class='empty-msg'>Sin habilidades añadidas.</p>";
+    const buscoHtml = (datos.habilidadesBusco || []).map(h => `<div class="card">${esc(h)}</div>`).join("") || "<p class='empty-msg'>Sin habilidades añadidas.</p>";
 
     let accionesHtml = "";
     if (usuarioActual) {
@@ -43,9 +44,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     contenedor.innerHTML = `
-      <div class="profile-avatar-placeholder">${datos.nombre.charAt(0).toUpperCase()}</div>
-      <h2>${datos.nombre}</h2>
-      <p class="profile-bio">${datos.bio || "Esta persona todavía no ha escrito una biografía."}</p>
+      <div class="profile-avatar-placeholder">${esc(String(datos.nombre).charAt(0).toUpperCase())}</div>
+      <h2>${esc(datos.nombre)}</h2>
+      <p class="profile-bio">${esc(datos.bio) || "Esta persona todavía no ha escrito una biografía."}</p>
 
       <div class="profile-skills">
         <div class="profile-column">
@@ -80,7 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <option value="aprendi">Yo aprendí</option>
           </select>
           <label>¿Cuántas horas?</label>
-          <input type="number" id="horas-input" min="0.5" step="0.5" value="1" style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
+          <input type="number" id="horas-input" min="0.5" max="10" step="0.5" value="1" style="width:100%; padding:10px; margin:8px 0; border-radius:6px; border:1px solid #ccc;">
           <button id="submit-session" class="mentor-button" style="width:100%;">Enviar registro</button>
           <p id="session-msg" class="auth-error"></p>
         `;
@@ -90,8 +91,8 @@ document.addEventListener("DOMContentLoaded", () => {
           const horas = parseFloat(document.getElementById("horas-input").value);
           const msg = document.getElementById("session-msg");
 
-          if (!horas || horas <= 0) {
-            msg.textContent = "Introduce un número de horas válido.";
+          if (!horas || horas <= 0 || horas > 10) {
+            msg.textContent = "Introduce un número de horas entre 0,5 y 10.";
             return;
           }
 

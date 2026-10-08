@@ -1,4 +1,5 @@
 import { auth, onAuthStateChanged, db, doc, getDoc, collection, addDoc, serverTimestamp, query, orderBy, onSnapshot } from "./firebase-config.js";
+import { esc } from "./utils.js";
 
 const params = new URLSearchParams(window.location.search);
 const otroUid = params.get("con");
@@ -28,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const nombreOtro = otroSnap.exists() ? otroSnap.data().nombre : "Usuario";
 
     contenedor.innerHTML = `
-      <h2>Conversación con ${nombreOtro}</h2>
+      <h2>Conversación con ${esc(nombreOtro)}</h2>
       <div id="messages-list" class="messages-list"></div>
       <div class="message-input-row">
         <input type="text" id="message-input" placeholder="Escribe un mensaje...">

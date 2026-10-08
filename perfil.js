@@ -1,4 +1,5 @@
 import { auth, onAuthStateChanged, db, doc, getDoc, updateDoc, collection, query, where, getDocs, addDoc, serverTimestamp } from "./firebase-config.js";
+import { esc } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const contenedor = document.getElementById("profile-content");
@@ -25,14 +26,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const datos = perfilSnap.data();
     const creditos = typeof datos.creditos === "number" ? datos.creditos : 0;
 
-    const ofrezcoHtml = (datos.habilidadesOfrezco || []).map(h => `<div class="card">${h}</div>`).join("") || "<p class='empty-msg'>Aún no has añadido habilidades.</p>";
-    const buscoHtml = (datos.habilidadesBusco || []).map(h => `<div class="card">${h}</div>`).join("") || "<p class='empty-msg'>Aún no has añadido habilidades.</p>";
+    const ofrezcoHtml = (datos.habilidadesOfrezco || []).map(h => `<div class="card">${esc(h)}</div>`).join("") || "<p class='empty-msg'>Aún no has añadido habilidades.</p>";
+    const buscoHtml = (datos.habilidadesBusco || []).map(h => `<div class="card">${esc(h)}</div>`).join("") || "<p class='empty-msg'>Aún no has añadido habilidades.</p>";
 
     contenedor.innerHTML = `
-      <div class="profile-avatar-placeholder">${datos.nombre.charAt(0).toUpperCase()}</div>
-      <h2>${datos.nombre}</h2>
+      <div class="profile-avatar-placeholder">${esc(String(datos.nombre).charAt(0).toUpperCase())}</div>
+      <h2>${esc(datos.nombre)}</h2>
       <div class="credits-badge">💰 ${creditos} créditos</div>
-      <p class="profile-bio">${datos.bio || "Todavía no has escrito una biografía."}</p>
+      <p class="profile-bio">${esc(datos.bio) || "Todavía no has escrito una biografía."}</p>
 
       <div class="profile-skills">
         <div class="profile-column">
@@ -74,11 +75,11 @@ async function cargarSesionesPendientes(miUid) {
     const creadorSnap = await getDoc(doc(db, "perfiles", ses.creadorId));
     const nombreCreador = creadorSnap.exists() ? creadorSnap.data().nombre : "Alguien";
     const descripcion = ses.rolCreador === "ensene"
-      ? `${nombreCreador} dice que te enseñó durante ${ses.horas}h`
-      : `${nombreCreador} dice que aprendió de ti durante ${ses.horas}h`;
+      ? `${esc(nombreCreador)} dice que te enseñó durante ${esc(ses.horas)}h`
+      : `${esc(nombreCreador)} dice que aprendió de ti durante ${esc(ses.horas)}h`;
 
     html += `
-      <div class="session-pending-card" data-id="${ses.id}">
+      <div class="session-pending-card" data-id="${esc(ses.id)}">
         <p>${descripcion}</p>
         <button class="confirm-session mentor-button">Confirmar</button>
         <button class="reject-session hero-button-dark">Rechazar</button>
@@ -90,6 +91,7 @@ async function cargarSesionesPendientes(miUid) {
 
   document.querySelectorAll(".confirm-session").forEach((btn) => {
     btn.addEventListener("click", (e) => {
+      btn.disabled = true;
       const card = e.target.closest(".session-pending-card");
       confirmarSesion(card.getAttribute("data-id"), miUid);
     });
@@ -97,6 +99,7 @@ async function cargarSesionesPendientes(miUid) {
 
   document.querySelectorAll(".reject-session").forEach((btn) => {
     btn.addEventListener("click", (e) => {
+      btn.disabled = true;
       const card = e.target.closest(".session-pending-card");
       rechazarSesion(card.getAttribute("data-id"));
     });
@@ -107,6 +110,17 @@ async function confirmarSesion(sesionId, miUid) {
   const sesionRef = doc(db, "sesiones", sesionId);
   const sesionSnap = await getDoc(sesionRef);
   const ses = sesionSnap.data();
+
+  if (ses.estado !== "pendiente") {
+    window.location.reload();
+    return;
+  }
+
+  if (typeof ses.horas !== "number" || !(ses.horas > 0) || ses.horas > 10) {
+    alert("Este registro tiene un número de horas no válido.");
+    window.location.reload();
+    return;
+  }
 
   const CREDITOS_POR_HORA = 10;
   const montoCreditos = Math.round(ses.horas * CREDITOS_POR_HORA);
