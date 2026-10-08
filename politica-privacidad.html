@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Política de privacidad — Skillswap</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='24' y2='24'%3E%3Cstop offset='0' stop-color='%233498db'/%3E%3Cstop offset='1' stop-color='%232c3e50'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='12' cy='12' r='12' fill='url(%23g)'/%3E%3Cpath fill='white' d='M7 7h7.5L13 5.5 14.2 4.3 17.9 8 14.2 11.7 13 10.5 14.5 9H7a2.2 2.2 0 000 4.4h1.5v1.6H7a3.8 3.8 0 010-7.6z'/%3E%3Cpath fill='white' d='M17 17H9.5L11 18.5 9.8 19.7 6.1 16 9.8 12.3 11 13.5 9.5 15H17a2.2 2.2 0 000-4.4h-1.5V9.4H17a3.8 3.8 0 010 7.6z'/%3E%3C/svg%3E">
+  <script type="module" src="firebase-config.js"></script>
   <link rel="stylesheet" href="styles.css">
   <script data-goatcounter="https://skillswap-web.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 </head>
@@ -11,7 +12,17 @@
 
   <header>
     <div class="logo">
-      
+      <svg class="logo-icon" viewBox="0 0 24 24" width="30" height="30">
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="24" y2="24">
+            <stop offset="0" stop-color="#3498db"/>
+            <stop offset="1" stop-color="#2c3e50"/>
+          </linearGradient>
+        </defs>
+        <circle cx="12" cy="12" r="12" fill="url(#logoGrad)"/>
+        <path fill="white" d="M7 7h7.5L13 5.5 14.2 4.3 17.9 8 14.2 11.7 13 10.5 14.5 9H7a2.2 2.2 0 000 4.4h1.5v1.6H7a3.8 3.8 0 010-7.6z"/>
+        <path fill="white" d="M17 17H9.5L11 18.5 9.8 19.7 6.1 16 9.8 12.3 11 13.5 9.5 15H17a2.2 2.2 0 000-4.4h-1.5V9.4H17a3.8 3.8 0 010 7.6z"/>
+      </svg>
       <span>Skillswap</span>
     </div>
     <nav>
@@ -19,44 +30,95 @@
       <a href="explorar.html">Explorar</a>
       <a href="perfil.html">Mi perfil</a>
       <a href="sobre-nosotros.html">Sobre nosotros</a>
+      <a href="politica-privacidad.html">Política de privacidad</a>
     </nav>
+    <div class="header-controls">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button>
+      <div id="auth-status" class="auth-status"></div>
+    </div>
   </header>
 
   <main>
     <section class="about-section">
       <h2>Política de privacidad</h2>
-      <p><em>Última actualización: septiembre de 2026</em></p>
-      <p>Skillswap es un proyecto en fase de desarrollo y validación de idea. Esta política explica de forma clara qué datos se recogen a través de este sitio y cómo se usan.</p>
+      <p><em>Última actualización: octubre de 2026</em></p>
+      <p>Skillswap es un proyecto en fase piloto. Esta política explica de forma clara qué datos se recogen, para qué se usan y qué derechos tienes sobre ellos.</p>
     </section>
 
     <section class="about-section">
-      <h3>¿Qué datos recogemos?</h3>
-      <p>Actualmente, el único dato personal que este sitio recoge es la <strong>dirección de email</strong> que introduces voluntariamente en el formulario de contacto ("¿Quieres estar entre los primeros en probar Skillswap?").</p>
+      <h3>1. Responsable del tratamiento</h3>
+      <p>Anadu Philip Nnadozie, promotor del proyecto Skillswap (Madrid, España). Contacto: <strong>contacto@skillswap.com</strong>.</p>
     </section>
 
     <section class="about-section">
-      <h3>¿Cómo se procesa ese dato?</h3>
-      <p>El formulario de contacto utiliza un servicio externo llamado <strong>Formspree</strong> para gestionar los envíos. Al enviar el formulario, tu email se transmite y almacena en los servidores de Formspree, no en un servidor propio de Skillswap. Puedes consultar la política de privacidad de Formspree en <a href="https://formspree.io/legal/privacy-policy/" target="_blank" rel="noopener">formspree.io/legal/privacy-policy</a>.</p>
+      <h3>2. Qué datos recogemos y para qué</h3>
+      <ul>
+        <li><strong>Cuenta.</strong> Tu email y tu contraseña, para que puedas registrarte e iniciar sesión. La contraseña la gestiona el servicio de autenticación de Google (Firebase) y se guarda cifrada: Skillswap no puede verla.</li>
+        <li><strong>Perfil.</strong> El nombre que elijas, tu biografía, las habilidades que ofreces y las que buscas, tu saldo de créditos y la fecha de creación de la cuenta.</li>
+        <li><strong>Créditos y sesiones.</strong> El historial de movimientos de tus créditos y los registros de sesiones de enseñanza o aprendizaje que haces con otras personas (con quién, horas, estado y fecha).</li>
+        <li><strong>Mensajes.</strong> El contenido de los mensajes que intercambias con otra persona. Esta función está en fase de pruebas.</li>
+        <li><strong>Sugerencias de habilidades.</strong> El texto que escribes cuando propones una habilidad que no está en el catálogo, junto con tu identificador de usuario.</li>
+        <li><strong>Lista de espera.</strong> El email que dejas en el formulario de la página de inicio.</li>
+        <li><strong>Estadísticas de visitas.</strong> Número de visitas por página, país y tipo de navegador, sin cookies y sin identificar a las personas, mediante GoatCounter.</li>
+        <li><strong>Almacenamiento en tu navegador.</strong> Guardamos tu idioma, tu tema (claro u oscuro) y tu sesión iniciada. Es información técnica que se queda en tu dispositivo y no se usa para publicidad ni para seguimiento.</li>
+      </ul>
     </section>
 
     <section class="about-section">
-      <h3>¿Para qué usamos tu email?</h3>
-      <p>Únicamente para avisarte cuando Skillswap esté disponible para su uso. No se comparte con terceros con fines comerciales ni se utiliza para ningún otro propósito.</p>
+      <h3>3. Qué puede ver cada persona</h3>
+      <ul>
+        <li><strong>Cualquier visitante, aunque no tenga cuenta:</strong> el nombre, la biografía, las habilidades y el saldo de créditos de tu perfil. No escribas en tu perfil nada que no quieras hacer público.</li>
+        <li><strong>Solo tú:</strong> tu email y tu historial de movimientos de créditos.</li>
+        <li><strong>Solo las dos personas implicadas:</strong> una sesión registrada y los mensajes de una conversación.</li>
+        <li><strong>Solo el responsable:</strong> las sugerencias de habilidades y, de forma técnica, el contenido de la base de datos a través del panel de Firebase. El responsable accede a esos datos únicamente para mantener el servicio, resolver incidencias o atender solicitudes tuyas.</li>
+      </ul>
     </section>
 
     <section class="about-section">
-      <h3>Preferencia de idioma (almacenamiento local)</h3>
-      <p>Este sitio guarda tu idioma preferido usando el almacenamiento local de tu navegador (<code>localStorage</code>). Este dato permanece únicamente en tu propio dispositivo, no se envía a ningún servidor, y puedes borrarlo en cualquier momento desde la configuración de tu navegador.</p>
+      <h3>4. Base legal</h3>
+      <ul>
+        <li>La ejecución del servicio que solicitas al crear una cuenta (art. 6.1.b del RGPD).</li>
+        <li>Tu consentimiento, para la lista de espera (art. 6.1.a). Puedes retirarlo en cualquier momento.</li>
+        <li>El interés legítimo en la seguridad del sitio y en obtener estadísticas anónimas (art. 6.1.f).</li>
+      </ul>
     </section>
 
     <section class="about-section">
-      <h3>Tus derechos</h3>
-      <p>Si nos has dejado tu email a través del formulario y quieres que lo eliminemos, puedes solicitarlo escribiendo a <strong>contacto@skillswap.com</strong>. Atenderemos tu solicitud de eliminación, acceso o rectificación de datos conforme al Reglamento General de Protección de Datos (RGPD).</p>
+      <h3>5. Con quién compartimos los datos</h3>
+      <p>Para funcionar, Skillswap se apoya en estos proveedores:</p>
+      <ul>
+        <li><strong>Google (Firebase Authentication y Cloud Firestore):</strong> gestionan las cuentas y la base de datos. Los datos se almacenan en la región multirregional europea de Google (eur3). Además, el sitio carga las librerías de Firebase desde servidores de Google.</li>
+        <li><strong>Formspree:</strong> recibe y reenvía el email de la lista de espera.</li>
+        <li><strong>GoatCounter:</strong> estadísticas de visitas sin cookies.</li>
+        <li><strong>GitHub Pages:</strong> aloja el sitio web y puede registrar la dirección IP de quien lo visita.</li>
+      </ul>
+      <p>Algunos de estos proveedores pueden tratar datos fuera del Espacio Económico Europeo, con las garantías que prevé la normativa (por ejemplo, las cláusulas contractuales tipo). No vendemos tus datos ni los cedemos a terceros con fines comerciales.</p>
     </section>
 
     <section class="about-section">
-      <h3>Cambios en esta política</h3>
-      <p>Esta política podrá actualizarse a medida que Skillswap añada nuevas funcionalidades (por ejemplo, cuentas de usuario o un sistema de créditos). Cualquier cambio relevante se reflejará en esta misma página.</p>
+      <h3>6. Cuánto tiempo los conservamos</h3>
+      <p>Conservamos tus datos mientras mantengas tu cuenta. Si pides su eliminación, borramos tu cuenta y tu perfil, y eliminamos o anonimizamos tus mensajes, sesiones y movimientos de créditos. El email de la lista de espera se conserva hasta que retires tu consentimiento o hasta que te avisemos del lanzamiento.</p>
+    </section>
+
+    <section class="about-section">
+      <h3>7. Tus derechos</h3>
+      <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación y portabilidad escribiendo a <strong>contacto@skillswap.com</strong> desde el email de tu cuenta. Tu biografía y tus habilidades las puedes cambiar tú mismo desde "Editar mi perfil"; para cambiar tu nombre, escríbenos.</p>
+      <p>Si consideras que tus datos no se tratan correctamente, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (<a href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a>).</p>
+    </section>
+
+    <section class="about-section">
+      <h3>8. Seguridad</h3>
+      <p>Las comunicaciones usan HTTPS y el acceso a la base de datos está limitado por reglas de seguridad. Aun así, ningún sistema es infalible. Skillswap está en fase piloto: si detectas algún problema de seguridad, escríbenos.</p>
+    </section>
+
+    <section class="about-section">
+      <h3>9. Menores de edad</h3>
+      <p>Skillswap no está dirigido a menores de 14 años. Si crees que un menor se ha registrado, escríbenos y eliminaremos la cuenta.</p>
+    </section>
+
+    <section class="about-section">
+      <h3>10. Cambios en esta política</h3>
+      <p>Actualizaremos esta política cuando Skillswap incorpore nuevas funciones. Los cambios relevantes se reflejarán en esta misma página.</p>
     </section>
   </main>
 
@@ -89,5 +151,7 @@
     <p class="footer-copyright">&copy; 2026 Skillswap</p>
   </footer>
 
+  <script src="script.js"></script>
+  <script type="module" src="auth-ui.js"></script>
 </body>
 </html>

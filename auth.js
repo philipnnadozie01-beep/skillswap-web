@@ -39,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   registerForm.addEventListener("submit", (evento) => {
     evento.preventDefault();
-    const nombre = document.getElementById("register-name").value;
+    const nombre = document.getElementById("register-name").value.trim();
     const email = document.getElementById("register-email").value;
     const password = document.getElementById("register-password").value;
     const errorBox = document.getElementById("register-error");
@@ -52,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const usuario = resultado.user;
         return setDoc(doc(db, "perfiles", usuario.uid), {
           nombre: nombre,
-          email: email,
           bio: "",
           habilidadesOfrezco: [],
           habilidadesBusco: [],
