@@ -7,7 +7,7 @@ function contarSkills(arr) {
 console.log("Número de habilidades:", contarSkills(skills));
 
 document.addEventListener("DOMContentLoaded", () => {
-  const boton = document.querySelector("button");
+  const boton = document.querySelector(".search-btn");
   const input = document.querySelector("#buscar");
   const error = document.querySelector("#error");
   const tarjetas = document.querySelectorAll(".card");
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (texto === "") {
         error.textContent = "Por favor, escribe algo para buscar.";
         tarjetas.forEach((tarjeta) => {
-          tarjeta.style.display = "block";
+          tarjeta.style.display = "";
         });
         return;
       }
@@ -30,11 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       tarjetas.forEach((tarjeta) => {
         const nombreSkill = tarjeta.textContent.toLowerCase();
-        if (nombreSkill.includes(texto)) {
-          tarjeta.style.display = "block";
-        } else {
-          tarjeta.style.display = "none";
-        }
+        tarjeta.style.display = nombreSkill.includes(texto) ? "" : "none";
       });
     });
   }
@@ -78,5 +74,13 @@ document.addEventListener("DOMContentLoaded", () => {
     tarjetaSugerir.addEventListener("click", () => {
       window.location.href = "sugerir-habilidad.html";
     });
+  }
+
+  const enlacePrivacidad = document.querySelector('.footer-col a[href="politica-privacidad.html"]');
+  if (enlacePrivacidad && !document.querySelector('.footer-col a[href="terminos-uso.html"]')) {
+    const enlaceTerminos = document.createElement("a");
+    enlaceTerminos.href = "terminos-uso.html";
+    enlaceTerminos.textContent = "Términos de uso";
+    enlacePrivacidad.insertAdjacentElement("afterend", enlaceTerminos);
   }
 });

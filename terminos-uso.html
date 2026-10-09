@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Términos de uso — Skillswap</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='24' y2='24'%3E%3Cstop offset='0' stop-color='%233498db'/%3E%3Cstop offset='1' stop-color='%232c3e50'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='12' cy='12' r='12' fill='url(%23g)'/%3E%3Cpath fill='white' d='M7 7h7.5L13 5.5 14.2 4.3 17.9 8 14.2 11.7 13 10.5 14.5 9H7a2.2 2.2 0 000 4.4h1.5v1.6H7a3.8 3.8 0 010-7.6z'/%3E%3Cpath fill='white' d='M17 17H9.5L11 18.5 9.8 19.7 6.1 16 9.8 12.3 11 13.5 9.5 15H17a2.2 2.2 0 000-4.4h-1.5V9.4H17a3.8 3.8 0 010 7.6z'/%3E%3C/svg%3E">
+  <script type="module" src="firebase-config.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <script data-goatcounter="https://skillswap-web.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <svg class="logo-icon" viewBox="0 0 24 24" width="30" height="30">
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="24" y2="24">
+            <stop offset="0" stop-color="#3498db"/>
+            <stop offset="1" stop-color="#2c3e50"/>
+          </linearGradient>
+        </defs>
+        <circle cx="12" cy="12" r="12" fill="url(#logoGrad)"/>
+        <path fill="white" d="M7 7h7.5L13 5.5 14.2 4.3 17.9 8 14.2 11.7 13 10.5 14.5 9H7a2.2 2.2 0 000 4.4h1.5v1.6H7a3.8 3.8 0 010-7.6z"/>
+        <path fill="white" d="M17 17H9.5L11 18.5 9.8 19.7 6.1 16 9.8 12.3 11 13.5 9.5 15H17a2.2 2.2 0 000-4.4h-1.5V9.4H17a3.8 3.8 0 010 7.6z"/>
+      </svg>
+      <span>Skillswap</span>
+    </div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="explorar.html">Explorar</a>
+      <a href="perfil.html">Mi perfil</a>
+      <a href="sobre-nosotros.html">Sobre nosotros</a>
+      <a href="politica-privacidad.html">Política de privacidad</a>
+    </nav>
+    <div class="header-controls">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button>
+      <div id="auth-status" class="auth-status"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="about-section">
+      <h2>Términos de uso</h2>
+      <p><em>Última actualización: octubre de 2026</em></p>
+      <p>Estos términos regulan el uso de Skillswap, un proyecto en fase piloto. Al crear una cuenta o usar el servicio aceptas lo que se explica aquí. Están escritos para que se entiendan: si algo no queda claro, escríbenos.</p>
+    </section>
+
+    <section class="about-section">
+      <h3>1. Qué es Skillswap</h3>
+      <p>Skillswap es un espacio para que personas intercambien conocimientos y habilidades: tú enseñas algo que sabes y aprendes algo que necesitas. Ponemos el espacio (perfiles, catálogo, mensajes, registro de sesiones y créditos), pero <strong>no impartimos las sesiones ni participamos en lo que acordéis entre vosotros</strong>.</p>
+      <p>Al ser un proyecto piloto, puede cambiar, tener fallos o interrumpirse.</p>
+    </section>
+
+    <section class="about-section">
+      <h3>2. Quién puede usarlo</h3>
+      <ul>
+        <li>Durante la fase piloto, solo personas <strong>mayores de 18 años</strong>.</li>
+        <li>Una cuenta por persona, con datos veraces.</li>
+        <li>Tú guardas tu contraseña y eres responsable de lo que se haga con tu cuenta.</li>
+      </ul>
+    </section>
+
+    <section class="about-section">
+      <h3>3. Los créditos</h3>
+      <ul>
+        <li>Los créditos son una unidad interna para llevar la cuenta de lo que das y recibes. <strong>No son dinero</strong>: no tienen valor monetario, no se pueden canjear por dinero y no se pueden vender, comprar ni transferir. Por ahora no existe ninguna forma de comprarlos.</li>
+        <li>Al registrarte recibes <strong>10 créditos de bienvenida</strong>.</li>
+        <li>Una hora de sesión equivale a <strong>10 créditos</strong>. Quien enseña suma créditos y quien aprende los gasta. Cada registro admite entre 0,5 y 10 horas.</li>
+        <li>Una sesión solo cuenta cuando <strong>la otra persona la confirma</strong>. Si no estás de acuerdo con un registro, puedes rechazarlo.</li>
+        <li>Si detectamos un error técnico o un uso indebido, podremos ajustar saldos. Durante la fase piloto, también podríamos reiniciarlos.</li>
+        <li>Si tu cuenta se elimina, tus créditos se pierden y no hay reembolso.</li>
+      </ul>
+    </section>
+
+    <section class="about-section">
+      <h3>4. Las sesiones entre personas</h3>
+      <ul>
+        <li>Cada persona decide si acepta una sesión, y cómo, cuándo y dónde se hace. Skillswap no comprueba la identidad, los conocimientos ni las titulaciones de nadie.</li>
+        <li><strong>Registra solo sesiones que de verdad ocurrieron</strong>, con las horas reales, y confirma solo las que ocurrieron. Falsear sesiones para conseguir créditos está prohibido.</li>
+        <li>Las sesiones se pagan únicamente con créditos. No pidas ni ofrezcas dinero a cambio de una sesión a través de Skillswap.</li>
+        <li>Lo que se enseña aquí es intercambio entre personas, no asesoramiento profesional. No sustituye a un médico, un abogado, un asesor financiero ni ningún otro profesional con titulación.</li>
+        <li>Si quedáis en persona, os recomendamos veros la primera vez en un lugar público y avisar a alguien de confianza. Cada persona es responsable de su propia seguridad.</li>
+      </ul>
+    </section>
+
+    <section class="about-section">
+      <h3>5. Normas de convivencia</h3>
+      <p>Para que Skillswap sea un espacio de confianza, no está permitido:</p>
+      <ul>
+        <li>Acosar, insultar, amenazar o discriminar a nadie por su origen, religión, género, orientación, discapacidad o cualquier otra condición.</li>
+        <li>Publicar contenido ilegal o que pertenezca a otra persona sin permiso.</li>
+        <li>Suplantar a otra persona o dar datos falsos.</li>
+        <li>Usar el servicio para publicidad, ventas o mensajes masivos.</li>
+        <li>Compartir datos personales de terceros sin su permiso.</li>
+        <li>Intentar manipular el sistema (por ejemplo, los créditos o las reglas de seguridad), acceder a cuentas ajenas o dañar el servicio.</li>
+      </ul>
+      <p>Tu nombre, tu biografía y tus habilidades son visibles para cualquier visitante. No escribas en ellos nada que no quieras hacer público.</p>
+    </section>
+
+    <section class="about-section">
+      <h3>6. Lo que publicas</h3>
+      <p>Lo que escribes en Skillswap sigue siendo tuyo. Nos das permiso, gratuito y no exclusivo, para mostrarlo dentro de la plataforma mientras tu cuenta exista y para hacer funcionar el servicio. Confirmas que tienes derecho a publicarlo.</p>
+    </section>
+
+    <section class="about-section">
+      <h3>7. Denuncias y suspensión</h3>
+      <p>Si algo incumple estos términos, escríbenos a <strong>contacto@skillswap.com</strong>. Podremos retirar contenido, suspender o eliminar cuentas que los incumplan y, para atender una denuncia concreta, revisar el contenido afectado. En la fase piloto la revisión es manual: no hay vigilancia automática de mensajes ni de perfiles.</p>
+    </section>
+
+    <section class="about-section">
+      <h3>8. Disponibilidad y responsabilidad</h3>
+      <p>El servicio se ofrece tal cual, sin garantía de que funcione sin interrupciones ni errores. Skillswap no se responsabiliza de lo que ocurra entre personas usuarias ni de lo que se enseñe en las sesiones. Todo ello, en la medida en que la ley lo permita: estos términos no limitan los derechos que la normativa reconoce a las personas consumidoras.</p>
+    </section>
+
+    <section class="about-section">
+      <h3>9. Cerrar tu cuenta</h3>
+      <p>Puedes pedir que eliminemos tu cuenta en cualquier momento escribiendo a <strong>contacto@skillswap.com</strong> desde el email con el que te registraste. Los detalles sobre tus datos están en la <a href="politica-privacidad.html">Política de privacidad</a>. También podemos cerrar el servicio o una cuenta cuando sea necesario.</p>
+    </section>
+
+    <section class="about-section">
+      <h3>10. Cambios en estos términos</h3>
+      <p>Podemos actualizar estos términos cuando Skillswap incorpore nuevas funciones, y los cambios relevantes se reflejarán en esta página. Si sigues usando el servicio después de un cambio, entendemos que lo aceptas. Si no estás de acuerdo, puedes pedir que eliminemos tu cuenta.</p>
+    </section>
+
+    <section class="about-section">
+      <h3>11. Responsable, ley aplicable y contacto</h3>
+      <p>Skillswap es un proyecto de Anadu Philip Nnadozie (Madrid, España). Estos términos se rigen por la legislación española; las personas consumidoras pueden acudir a los tribunales que les correspondan según la normativa de consumo. Contacto: <strong>contacto@skillswap.com</strong>.</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h3>Skillswap</h3>
+        <p>Aprende y enseña habilidades intercambiando conocimiento con otras personas.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Enlaces</h3>
+        <a href="index.html">Inicio</a>
+        <a href="explorar.html">Explorar</a>
+        <a href="perfil.html">Mi perfil</a>
+        <a href="sobre-nosotros.html">Sobre nosotros</a>
+        <a href="politica-privacidad.html">Política de privacidad</a>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contacto</h3>
+        <p>contacto@skillswap.com</p>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer-copyright">&copy; 2026 Skillswap</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script type="module" src="auth-ui.js"></script>
+</body>
+</html>
