@@ -77,10 +77,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const enlacePrivacidad = document.querySelector('.footer-col a[href="politica-privacidad.html"]');
-  if (enlacePrivacidad && !document.querySelector('.footer-col a[href="terminos-uso.html"]')) {
-    const enlaceTerminos = document.createElement("a");
-    enlaceTerminos.href = "terminos-uso.html";
-    enlaceTerminos.textContent = "Términos de uso";
-    enlacePrivacidad.insertAdjacentElement("afterend", enlaceTerminos);
+  if (enlacePrivacidad) {
+    let ultimo = enlacePrivacidad;
+    [["terminos-uso.html", "Términos de uso"], ["comentarios.html", "Enviar comentarios"]].forEach(([href, texto]) => {
+      if (!document.querySelector('.footer-col a[href="' + href + '"]')) {
+        const enlace = document.createElement("a");
+        enlace.href = href;
+        enlace.textContent = texto;
+        ultimo.insertAdjacentElement("afterend", enlace);
+        ultimo = enlace;
+      }
+    });
   }
 });

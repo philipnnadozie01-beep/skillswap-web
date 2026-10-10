@@ -950,3 +950,58 @@ nav {
   color: var(--text-secondary);
   margin: 10px 0 0 0;
 }
+.feedback-section {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 40px;
+  background-color: var(--bg-card);
+  border-radius: 8px;
+}
+
+.feedback-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.feedback-form input[type="email"],
+.feedback-form select,
+.feedback-form textarea {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 15px;
+}
+
+.feedback-form textarea {
+  resize: vertical;
+}
+
+.feedback-form button[type="submit"] {
+  padding: 14px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.feedback-form button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.feedback-optional {
+  font-weight: normal;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.feedback-legal {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0;
+}

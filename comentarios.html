@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Enviar comentarios — Skillswap</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24' height='24'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='24' y2='24'%3E%3Cstop offset='0' stop-color='%233498db'/%3E%3Cstop offset='1' stop-color='%232c3e50'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='12' cy='12' r='12' fill='url(%23g)'/%3E%3Cpath fill='white' d='M7 7h7.5L13 5.5 14.2 4.3 17.9 8 14.2 11.7 13 10.5 14.5 9H7a2.2 2.2 0 000 4.4h1.5v1.6H7a3.8 3.8 0 010-7.6z'/%3E%3Cpath fill='white' d='M17 17H9.5L11 18.5 9.8 19.7 6.1 16 9.8 12.3 11 13.5 9.5 15H17a2.2 2.2 0 000-4.4h-1.5V9.4H17a3.8 3.8 0 010 7.6z'/%3E%3C/svg%3E">
+  <script type="module" src="firebase-config.js"></script>
+  <link rel="stylesheet" href="styles.css">
+  <script data-goatcounter="https://skillswap-web.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+
+  <header>
+    <div class="logo">
+      <svg class="logo-icon" viewBox="0 0 24 24" width="30" height="30">
+        <defs>
+          <linearGradient id="logoGrad" x1="0" y1="0" x2="24" y2="24">
+            <stop offset="0" stop-color="#3498db"/>
+            <stop offset="1" stop-color="#2c3e50"/>
+          </linearGradient>
+        </defs>
+        <circle cx="12" cy="12" r="12" fill="url(#logoGrad)"/>
+        <path fill="white" d="M7 7h7.5L13 5.5 14.2 4.3 17.9 8 14.2 11.7 13 10.5 14.5 9H7a2.2 2.2 0 000 4.4h1.5v1.6H7a3.8 3.8 0 010-7.6z"/>
+        <path fill="white" d="M17 17H9.5L11 18.5 9.8 19.7 6.1 16 9.8 12.3 11 13.5 9.5 15H17a2.2 2.2 0 000-4.4h-1.5V9.4H17a3.8 3.8 0 010 7.6z"/>
+      </svg>
+      <span>Skillswap</span>
+    </div>
+    <nav>
+      <a href="index.html">Inicio</a>
+      <a href="explorar.html">Explorar</a>
+      <a href="perfil.html">Mi perfil</a>
+      <a href="sobre-nosotros.html">Sobre nosotros</a>
+      <a href="politica-privacidad.html">Política de privacidad</a>
+    </nav>
+    <div class="header-controls">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Cambiar tema">🌙</button>
+      <div id="auth-status" class="auth-status"></div>
+    </div>
+  </header>
+
+  <main>
+    <section class="feedback-section">
+      <h2>Cuéntanos qué piensas</h2>
+      <p>Skillswap está en fase piloto y tu opinión nos ayuda a mejorarlo. Una sugerencia, algo que no funciona o una idea: todo suma.</p>
+
+      <form id="feedback-form" class="feedback-form" action="https://formspree.io/f/xnpnneky" method="POST">
+        <label for="fb-tipo">¿Qué quieres contarnos?</label>
+        <select id="fb-tipo" name="tipo">
+          <option value="Sugerencia">Una sugerencia</option>
+          <option value="Problema">Algo no funciona</option>
+          <option value="Idea">Una idea para Skillswap</option>
+          <option value="Otro">Otra cosa</option>
+        </select>
+
+        <label for="fb-mensaje">Tu mensaje</label>
+        <textarea id="fb-mensaje" name="mensaje" rows="6" minlength="10" maxlength="1500" required placeholder="Cuéntanoslo con tus propias palabras..."></textarea>
+
+        <label for="fb-email">Tu email <span class="feedback-optional">(opcional, solo si quieres que te respondamos)</span></label>
+        <input type="email" id="fb-email" name="email" maxlength="120">
+
+        <input type="hidden" name="_subject" value="Comentarios Skillswap">
+        <input type="hidden" name="pagina" id="fb-pagina">
+        <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="display: none;">
+
+        <p class="feedback-legal">Al enviar, aceptas que usemos tu mensaje (y tu email, si lo indicas) para atender tu comentario. Más información en la <a href="politica-privacidad.html">Política de privacidad</a>.</p>
+
+        <button type="submit" id="fb-enviar">Enviar comentario</button>
+        <p id="fb-msg" class="auth-error"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-columns">
+      <div class="footer-col">
+        <h3>Skillswap</h3>
+        <p>Aprende y enseña habilidades intercambiando conocimiento con otras personas.</p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Enlaces</h3>
+        <a href="index.html">Inicio</a>
+        <a href="explorar.html">Explorar</a>
+        <a href="perfil.html">Mi perfil</a>
+        <a href="sobre-nosotros.html">Sobre nosotros</a>
+        <a href="politica-privacidad.html">Política de privacidad</a>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contacto</h3>
+        <p>Escríbenos con este formulario.</p>
+        <div class="footer-social">
+          <a href="#">Instagram</a>
+          <a href="#">LinkedIn</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="footer-copyright">&copy; 2026 Skillswap</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="comentarios.js"></script>
+  <script type="module" src="auth-ui.js"></script>
+</body>
+</html>
