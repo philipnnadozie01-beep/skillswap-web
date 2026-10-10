@@ -1,5 +1,5 @@
 import { auth, onAuthStateChanged, db, doc, getDoc, addDoc, collection, serverTimestamp } from "./firebase-config.js";
-import { esc } from "./utils.js";
+import { esc, avatarHtml } from "./utils.js";
 
 const params = new URLSearchParams(window.location.search);
 const uidPerfil = params.get("uid");
@@ -44,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     contenedor.innerHTML = `
-      <div class="profile-avatar-placeholder">${esc(String(datos.nombre).charAt(0).toUpperCase())}</div>
+      ${avatarHtml(datos.nombre, datos.foto)}
       <h2>${esc(datos.nombre)}</h2>
       <p class="profile-bio">${esc(datos.bio) || "Esta persona todavía no ha escrito una biografía."}</p>
 
@@ -87,16 +87,37 @@ document.addEventListener("DOMContentLoaded", () => {
         `;
 
         document.getElementById("submit-session").addEventListener("click", async () => {
+          const botonEnviar = document.getElementById("submit-session");
           const rol = document.getElementById("rol-select").value;
           const horas = parseFloat(document.getElementById("horas-input").value);
           const msg = document.getElementById("session-msg");
+          msg.style.color = "";
+          msg.textContent = "";
 
-          if (!horas || horas <= 0 || horas > 10) {
+          if (!horas || horas < 0.5 || horas > 10) {
             msg.textContent = "Introduce un número de horas entre 0,5 y 10.";
             return;
           }
 
+          botonEnviar.disabled = true;
+
           try {
+            const monto = Math.round(horas * 10);
+            const misDatos = await getDoc(doc(db, "perfiles", usuarioActual.uid));
+            const misCreditos = misDatos.exists() ? (misDatos.data().creditos || 0) : 0;
+            const susCreditos = datos.creditos || 0;
+
+            if (rol === "aprendi" && misCreditos < monto) {
+              msg.textContent = "No tienes créditos suficientes: esta sesión cuesta " + monto + " y tienes " + misCreditos + ".";
+              botonEnviar.disabled = false;
+              return;
+            }
+            if (rol === "ensene" && susCreditos < monto) {
+              msg.textContent = datos.nombre + " no tiene créditos suficientes para esta sesión (cuesta " + monto + " y tiene " + susCreditos + ").";
+              botonEnviar.disabled = false;
+              return;
+            }
+
             await addDoc(collection(db, "sesiones"), {
               creadorId: usuarioActual.uid,
               otroId: uidPerfil,
@@ -109,6 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
             msg.textContent = "✅ Registro enviado. Quedará pendiente hasta que " + datos.nombre + " lo confirme.";
           } catch (error) {
             msg.textContent = "Error al enviar. Inténtalo de nuevo.";
+            botonEnviar.disabled = false;
             console.error(error);
           }
         });

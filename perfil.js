@@ -1,5 +1,5 @@
-import { auth, onAuthStateChanged, db, doc, getDoc, updateDoc, collection, query, where, getDocs, addDoc, serverTimestamp } from "./firebase-config.js";
-import { esc } from "./utils.js";
+import { auth, onAuthStateChanged, db, doc, getDoc, updateDoc, collection, query, where, getDocs, runTransaction, serverTimestamp } from "./firebase-config.js";
+import { esc, avatarHtml } from "./utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const contenedor = document.getElementById("profile-content");
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const buscoHtml = (datos.habilidadesBusco || []).map(h => `<div class="card">${esc(h)}</div>`).join("") || "<p class='empty-msg'>Aún no has añadido habilidades.</p>";
 
     contenedor.innerHTML = `
-      <div class="profile-avatar-placeholder">${esc(String(datos.nombre).charAt(0).toUpperCase())}</div>
+      ${avatarHtml(datos.nombre, datos.foto)}
       <h2>${esc(datos.nombre)}</h2>
       <div class="credits-badge">💰 ${creditos} créditos</div>
       <p class="profile-bio">${esc(datos.bio) || "Todavía no has escrito una biografía."}</p>
@@ -93,7 +93,7 @@ async function cargarSesionesPendientes(miUid) {
     btn.addEventListener("click", (e) => {
       btn.disabled = true;
       const card = e.target.closest(".session-pending-card");
-      confirmarSesion(card.getAttribute("data-id"), miUid);
+      confirmarSesion(card.getAttribute("data-id"));
     });
   });
 
@@ -106,64 +106,91 @@ async function cargarSesionesPendientes(miUid) {
   });
 }
 
-async function confirmarSesion(sesionId, miUid) {
+async function confirmarSesion(sesionId) {
   const sesionRef = doc(db, "sesiones", sesionId);
-  const sesionSnap = await getDoc(sesionRef);
-  const ses = sesionSnap.data();
-
-  if (ses.estado !== "pendiente") {
-    window.location.reload();
-    return;
-  }
-
-  if (typeof ses.horas !== "number" || !(ses.horas > 0) || ses.horas > 10) {
-    alert("Este registro tiene un número de horas no válido.");
-    window.location.reload();
-    return;
-  }
-
   const CREDITOS_POR_HORA = 10;
-  const montoCreditos = Math.round(ses.horas * CREDITOS_POR_HORA);
 
-  const creadorRef = doc(db, "perfiles", ses.creadorId);
-  const otroRef = doc(db, "perfiles", ses.otroId);
-  const creadorSnap = await getDoc(creadorRef);
-  const otroSnap = await getDoc(otroRef);
+  try {
+    await runTransaction(db, async (t) => {
+      const sesionSnap = await t.get(sesionRef);
+      if (!sesionSnap.exists()) throw new Error("NO_EXISTE");
+      const ses = sesionSnap.data();
 
-  const creditosCreadorActual = creadorSnap.data().creditos || 0;
-  const creditosOtroActual = otroSnap.data().creditos || 0;
+      if (ses.estado !== "pendiente") throw new Error("YA_RESUELTA");
+      if (typeof ses.horas !== "number" || !(ses.horas >= 0.5) || ses.horas > 10) throw new Error("HORAS_INVALIDAS");
 
-  if (ses.rolCreador === "ensene") {
-    await updateDoc(creadorRef, { creditos: creditosCreadorActual + montoCreditos });
-    await updateDoc(otroRef, { creditos: Math.max(0, creditosOtroActual - montoCreditos) });
-  } else {
-    await updateDoc(otroRef, { creditos: creditosOtroActual + montoCreditos });
-    await updateDoc(creadorRef, { creditos: Math.max(0, creditosCreadorActual - montoCreditos) });
+      const monto = Math.round(ses.horas * CREDITOS_POR_HORA);
+      const creadorRef = doc(db, "perfiles", ses.creadorId);
+      const otroRef = doc(db, "perfiles", ses.otroId);
+      const creadorSnap = await t.get(creadorRef);
+      const otroSnap = await t.get(otroRef);
+      if (!creadorSnap.exists() || !otroSnap.exists()) throw new Error("PERFIL_NO_EXISTE");
+
+      const creditosCreador = creadorSnap.data().creditos || 0;
+      const creditosOtro = otroSnap.data().creditos || 0;
+
+      const creadorEnseno = ses.rolCreador === "ensene";
+      const profesorRef = creadorEnseno ? creadorRef : otroRef;
+      const alumnoRef = creadorEnseno ? otroRef : creadorRef;
+      const profesorId = creadorEnseno ? ses.creadorId : ses.otroId;
+      const alumnoId = creadorEnseno ? ses.otroId : ses.creadorId;
+      const creditosProfesor = creadorEnseno ? creditosCreador : creditosOtro;
+      const creditosAlumno = creadorEnseno ? creditosOtro : creditosCreador;
+
+      if (creditosAlumno < monto) {
+        const err = new Error("SIN_CREDITOS");
+        err.necesarios = monto;
+        err.disponibles = creditosAlumno;
+        err.alumnoSoyYo = (alumnoId === auth.currentUser.uid);
+        throw err;
+      }
+
+      t.update(profesorRef, { creditos: creditosProfesor + monto });
+      t.update(alumnoRef, { creditos: creditosAlumno - monto });
+
+      t.set(doc(collection(db, "transacciones")), {
+        usuarioId: profesorId,
+        tipo: "enseñanza",
+        cantidad: monto,
+        descripcion: "Sesión confirmada de " + ses.horas + "h",
+        fecha: serverTimestamp()
+      });
+      t.set(doc(collection(db, "transacciones")), {
+        usuarioId: alumnoId,
+        tipo: "aprendizaje",
+        cantidad: -monto,
+        descripcion: "Sesión confirmada de " + ses.horas + "h",
+        fecha: serverTimestamp()
+      });
+
+      t.update(sesionRef, { estado: "confirmada" });
+    });
+  } catch (error) {
+    if (error.message === "SIN_CREDITOS") {
+      if (error.alumnoSoyYo) {
+        alert("No tienes créditos suficientes para confirmar esta sesión: necesitas " + error.necesarios + " y tienes " + error.disponibles + ".\n\nPuedes rechazarla, o enseñar una sesión para conseguir créditos.");
+      } else {
+        alert("La otra persona no tiene créditos suficientes (necesita " + error.necesarios + " y tiene " + error.disponibles + "), así que esta sesión no se puede confirmar todavía.");
+      }
+    } else if (error.message === "YA_RESUELTA") {
+      alert("Esta sesión ya estaba resuelta.");
+    } else if (error.message === "HORAS_INVALIDAS") {
+      alert("Este registro tiene un número de horas no válido.");
+    } else {
+      alert("No se pudo confirmar la sesión. Inténtalo de nuevo.");
+      console.error(error);
+    }
   }
-
-  await addDoc(collection(db, "transacciones"), {
-    usuarioId: ses.creadorId,
-    tipo: ses.rolCreador === "ensene" ? "enseñanza" : "aprendizaje",
-    cantidad: ses.rolCreador === "ensene" ? montoCreditos : -montoCreditos,
-    descripcion: "Sesión confirmada de " + ses.horas + "h",
-    fecha: serverTimestamp()
-  });
-
-  await addDoc(collection(db, "transacciones"), {
-    usuarioId: ses.otroId,
-    tipo: ses.rolCreador === "ensene" ? "aprendizaje" : "enseñanza",
-    cantidad: ses.rolCreador === "ensene" ? -montoCreditos : montoCreditos,
-    descripcion: "Sesión confirmada de " + ses.horas + "h",
-    fecha: serverTimestamp()
-  });
-
-  await updateDoc(sesionRef, { estado: "confirmada" });
 
   window.location.reload();
 }
 
 async function rechazarSesion(sesionId) {
-  const sesionRef = doc(db, "sesiones", sesionId);
-  await updateDoc(sesionRef, { estado: "rechazada" });
+  try {
+    await updateDoc(doc(db, "sesiones", sesionId), { estado: "rechazada" });
+  } catch (error) {
+    alert("No se pudo rechazar la sesión. Inténtalo de nuevo.");
+    console.error(error);
+  }
   window.location.reload();
 }

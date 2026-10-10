@@ -1,9 +1,13 @@
 import { auth, onAuthStateChanged, db, collection, getDocs, doc, getDoc } from "./firebase-config.js";
+import { esc } from "./utils.js";
 
-function esc(texto) {
-  const d = document.createElement("div");
-  d.textContent = texto;
-  return d.innerHTML;
+function clave(texto) {
+  return String(texto || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 function mostrarRestringido(contenedor, conLogin) {
@@ -39,8 +43,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       for (const docSnap of snapshot.docs) {
         const datos = docSnap.data();
-        const clave = String(datos.texto || "").trim().toLowerCase();
-        if (!clave) continue;
+        const k = clave(datos.texto);
+        if (!k) continue;
 
         if (!(datos.usuarioId in nombresCache)) {
           let nombre = "Usuario desconocido";
@@ -51,11 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
           nombresCache[datos.usuarioId] = nombre;
         }
 
-        if (!grupos[clave]) {
-          grupos[clave] = { texto: String(datos.texto).trim(), veces: 0, usuarios: new Set() };
+        if (!grupos[k]) {
+          grupos[k] = { texto: String(datos.texto).trim(), veces: 0, usuarios: new Set() };
         }
-        grupos[clave].veces += 1;
-        grupos[clave].usuarios.add(nombresCache[datos.usuarioId]);
+        grupos[k].veces += 1;
+        grupos[k].usuarios.add(nombresCache[datos.usuarioId]);
       }
 
       const lista = Object.values(grupos).sort((a, b) => b.veces - a.veces);

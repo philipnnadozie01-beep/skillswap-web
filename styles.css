@@ -907,3 +907,46 @@ nav {
   padding: 0;
   flex-shrink: 0;
 }
+.photo-edit-row {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: 10px 0 25px 0;
+}
+
+.photo-edit-row .profile-avatar-img,
+.photo-edit-row .profile-avatar-placeholder {
+  margin: 0;
+}
+
+.photo-edit-actions {
+  flex: 1;
+  min-width: 220px;
+}
+
+.photo-pick-btn {
+  padding: 10px 16px;
+  background-color: #2c3e50;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.photo-remove-btn {
+  padding: 10px 16px;
+  background: transparent;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.photo-hint {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 10px 0 0 0;
+}
