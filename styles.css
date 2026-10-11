@@ -1005,3 +1005,98 @@ nav {
   color: var(--text-secondary);
   margin: 0;
 }
+/* ===== Cabecera y diseño móvil (versión final) ===== */
+
+header {
+  flex-wrap: nowrap;
+  gap: 20px;
+}
+
+.logo {
+  flex-shrink: 0;
+}
+
+nav {
+  flex: 1 1 auto;
+  justify-content: center;
+}
+
+.header-controls {
+  flex-shrink: 0;
+  justify-content: flex-end;
+}
+
+@media (max-width: 900px) {
+  header,
+  [dir="rtl"] header {
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    position: static;
+    padding: 12px 15px;
+    gap: 10px;
+  }
+
+  nav {
+    flex: 0 0 auto;
+    justify-content: center;
+    gap: 4px 6px;
+  }
+
+  nav a {
+    margin: 0;
+    padding: 4px 8px;
+    font-size: 15px;
+  }
+
+  .header-controls {
+    flex-shrink: 1;
+    justify-content: center;
+  }
+
+  .auth-status {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .auth-user {
+    font-size: 13px;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    padding: 50px 20px;
+  }
+
+  .cards-container {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    width: auto;
+  }
+
+  .footer-columns {
+    gap: 30px;
+  }
+
+  .auth-section,
+  .feedback-section,
+  .chat-section {
+    margin: 20px 12px;
+    padding: 25px 20px;
+  }
+
+  section,
+  .how-it-works,
+  .testimonials,
+  .mentor-cta,
+  .contact-section,
+  .about-section,
+  .profile-section {
+    margin: 12px;
+    padding: 25px 18px;
+  }
+}
