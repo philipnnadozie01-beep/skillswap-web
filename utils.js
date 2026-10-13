@@ -19,3 +19,11 @@ export function avatarHtml(nombre, foto) {
   }
   return `<div class="profile-avatar-placeholder">${esc(String(nombre ?? "").charAt(0).toUpperCase())}</div>`;
 }
+
+export function avatarMiniHtml(nombre, foto) {
+  const f = fotoSegura(foto);
+  if (f) {
+    return `<img src="${f}" alt="" class="mini-avatar">`;
+  }
+  return `<div class="mini-avatar mini-avatar-letter">${esc(String(nombre ?? "").charAt(0).toUpperCase())}</div>`;
+}

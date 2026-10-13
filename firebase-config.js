@@ -3,6 +3,7 @@ import {
   getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  sendPasswordResetEmail,
   onAuthStateChanged,
   signOut
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
@@ -21,7 +22,8 @@ import {
   orderBy,
   onSnapshot,
   where,
-  runTransaction
+  runTransaction,
+  writeBatch
 } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -38,9 +40,10 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 
 export {
-  auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged, signOut,
+  auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, sendPasswordResetEmail,
+  onAuthStateChanged, signOut,
   db, doc, setDoc, getDoc, updateDoc, deleteField, collection, getDocs, addDoc, serverTimestamp,
-  query, orderBy, onSnapshot, where, runTransaction
+  query, orderBy, onSnapshot, where, runTransaction, writeBatch
 };
 
 console.log("Firebase conectado correctamente ✅");

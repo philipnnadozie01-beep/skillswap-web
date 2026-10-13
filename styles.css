@@ -1211,3 +1211,140 @@ input, select, textarea, button {
     font-size: 16px;
   }
 }
+.auth-link {
+  font-size: 14px;
+  color: #3498db;
+  text-decoration: none;
+  text-align: center;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
+
+.auth-help {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.auth-messages {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.auth-messages:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.messages-badge {
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 10px;
+  padding: 1px 7px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.inbox-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 20px 0;
+}
+
+.inbox-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  background-color: var(--bg-main);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.inbox-item:hover {
+  filter: brightness(0.96);
+}
+
+.inbox-item.unread {
+  border-left: 4px solid #3498db;
+}
+
+.inbox-item.unread .inbox-last {
+  font-weight: bold;
+  color: var(--text-main);
+}
+
+.inbox-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.inbox-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.inbox-date {
+  font-size: 12px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.inbox-last {
+  font-size: 14px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.inbox-dot {
+  width: 10px;
+  height: 10px;
+  background-color: #3498db;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.inbox-hint {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.mini-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.mini-avatar-letter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #3498db, #2c3e50);
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.chat-back {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 14px;
+  color: #3498db;
+  text-decoration: none;
+}
