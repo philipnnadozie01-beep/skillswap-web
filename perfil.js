@@ -1,5 +1,6 @@
 import { auth, onAuthStateChanged, db, doc, getDoc, updateDoc, collection, query, where, getDocs, runTransaction, serverTimestamp } from "./firebase-config.js";
 import { esc, avatarHtml } from "./utils.js";
+import { cargarResenas, nombresDeAutores, resumenResenasHtml, listaResenasHtml, sesionesPorValorar } from "./resenas.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   const contenedor = document.getElementById("profile-content");
@@ -49,9 +50,13 @@ document.addEventListener("DOMContentLoaded", () => {
       <a href="editar-perfil.html" class="mentor-button" style="margin-top: 25px;">Editar mi perfil</a>
 
       <div id="pending-sessions" style="margin-top: 35px; text-align:left;"></div>
+      <div id="to-review" class="reviews-section"></div>
+      <div id="my-reviews" class="reviews-section"></div>
     `;
 
     cargarSesionesPendientes(usuario.uid);
+    cargarPorValorar(usuario.uid);
+    cargarMisResenas(usuario.uid);
   });
 });
 
@@ -104,6 +109,49 @@ async function cargarSesionesPendientes(miUid) {
       rechazarSesion(card.getAttribute("data-id"));
     });
   });
+}
+
+async function cargarPorValorar(miUid) {
+  const contenedor = document.getElementById("to-review");
+  try {
+    const pendientes = await sesionesPorValorar(miUid);
+    if (!pendientes.length) {
+      contenedor.innerHTML = "";
+      return;
+    }
+
+    let html = `<h3>Sesiones por valorar</h3><p class="review-form-hint">Tu opinión ayuda a que la comunidad confíe en cada persona.</p>`;
+    for (const p of pendientes) {
+      const snap = await getDoc(doc(db, "perfiles", p.profesorId));
+      const nombre = snap.exists() ? snap.data().nombre : "Alguien";
+      html += `
+        <div class="session-pending-card">
+          <p>Sesión de ${esc(p.horas)}h con <strong>${esc(nombre)}</strong></p>
+          <a href="perfil-publico.html?uid=${esc(encodeURIComponent(p.profesorId))}#resena" class="mentor-button">Escribir reseña</a>
+        </div>
+      `;
+    }
+    contenedor.innerHTML = html;
+  } catch (error) {
+    console.error(error);
+    contenedor.innerHTML = "";
+  }
+}
+
+async function cargarMisResenas(miUid) {
+  const contenedor = document.getElementById("my-reviews");
+  try {
+    const { lista, total, media } = await cargarResenas(miUid);
+    const nombres = await nombresDeAutores(lista);
+    contenedor.innerHTML = `
+      <h3>Reseñas que has recibido</h3>
+      ${resumenResenasHtml(media, total)}
+      <div class="reviews-list">${listaResenasHtml(lista, nombres)}</div>
+    `;
+  } catch (error) {
+    console.error(error);
+    contenedor.innerHTML = "";
+  }
 }
 
 async function confirmarSesion(sesionId) {

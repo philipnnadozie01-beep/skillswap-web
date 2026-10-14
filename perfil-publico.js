@@ -1,5 +1,6 @@
 import { auth, onAuthStateChanged, db, doc, getDoc, addDoc, collection, serverTimestamp } from "./firebase-config.js";
 import { esc, avatarHtml } from "./utils.js";
+import { cargarResenas, nombresDeAutores, resumenResenasHtml, listaResenasHtml, sesionesPorValorar, formularioResenaHtml, activarFormularioResena } from "./resenas.js";
 
 const params = new URLSearchParams(window.location.search);
 const uidPerfil = params.get("uid");
@@ -29,6 +30,20 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
+    let resenas = { lista: [], total: 0, media: 0 };
+    let nombres = {};
+    let porValorar = [];
+    try {
+      resenas = await cargarResenas(uidPerfil);
+      nombres = await nombresDeAutores(resenas.lista);
+      if (usuarioActual) {
+        const todas = await sesionesPorValorar(usuarioActual.uid);
+        porValorar = todas.filter((s) => s.profesorId === uidPerfil);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+
     const ofrezcoHtml = (datos.habilidadesOfrezco || []).map(h => `<div class="card">${esc(h)}</div>`).join("") || "<p class='empty-msg'>Sin habilidades añadidas.</p>";
     const buscoHtml = (datos.habilidadesBusco || []).map(h => `<div class="card">${esc(h)}</div>`).join("") || "<p class='empty-msg'>Sin habilidades añadidas.</p>";
 
@@ -43,9 +58,12 @@ document.addEventListener("DOMContentLoaded", () => {
       accionesHtml = `<p style="margin-top: 20px;">Debes <a href="cuenta.html">iniciar sesión</a> para contactar o registrar una sesión.</p>`;
     }
 
+    const formularioHtml = porValorar.length ? formularioResenaHtml(datos.nombre, porValorar[0].horas) : "";
+
     contenedor.innerHTML = `
       ${avatarHtml(datos.nombre, datos.foto)}
       <h2>${esc(datos.nombre)}</h2>
+      <div class="public-rating">${resumenResenasHtml(resenas.media, resenas.total)}</div>
       <p class="profile-bio">${esc(datos.bio) || "Esta persona todavía no ha escrito una biografía."}</p>
 
       <div class="profile-skills">
@@ -60,7 +78,22 @@ document.addEventListener("DOMContentLoaded", () => {
       </div>
 
       ${accionesHtml}
+
+      <div class="reviews-section">
+        <h3>Reseñas</h3>
+        <div id="resena">${formularioHtml}</div>
+        <div class="reviews-list">${listaResenasHtml(resenas.lista, nombres)}</div>
+      </div>
     `;
+
+    if (porValorar.length) {
+      activarFormularioResena(porValorar[0], usuarioActual.uid, () => window.location.reload());
+    }
+
+    if (window.location.hash === "#resena") {
+      const zona = document.getElementById("resena");
+      if (zona) zona.scrollIntoView({ behavior: "smooth" });
+    }
 
     const btnMsg = document.getElementById("contact-btn");
     if (btnMsg) {
